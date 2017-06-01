@@ -1,4 +1,5 @@
-# coding: utf-8
+# -*- coding: utf-8 -*-
+from operator import lt
 
 
 class LispSyntaxError(Exception):
@@ -27,6 +28,10 @@ def lisp_cond(*pred_cons_pairs, _else=None):
         raise LispSyntaxError('Bad arguments for Lisp cond')
 
 
+def lisp_abs(x):
+    return lisp_cond((lt(x, 0), -x), _else=x)
+
+
 if __name__ == '__main__':
     print(
         lisp_if(
@@ -41,4 +46,8 @@ if __name__ == '__main__':
             (1 > 2, '1 is greater than 2'),
             _else='1 is lesser than 2'
         )
+    )
+
+    print(
+        lisp_abs(-5)
     )
