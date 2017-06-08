@@ -11,21 +11,17 @@ def lisp_if(predicate, consequent, alternative):
 
 
 def lisp_cond(*pred_cons_pairs, _else=None):
-    def test(arguments):
-        if not arguments:
-            return False
-        predicate, consequent = arguments[0]
-        return predicate and consequent or test(arguments[1:])
-
-    try:
-        res = test(pred_cons_pairs)
-        if res:
-            return res
+    if not pred_cons_pairs[0]:
         if _else is not None:
             return _else
         raise LispSyntaxError('Undefined behavior for cond')
+    try:
+        predicate, consequent = pred_cons_pairs[0]
     except (ValueError, TypeError):
         raise LispSyntaxError('Bad arguments for Lisp cond')
+    if predicate:
+        return consequent
+    return lisp_cond(pred_cons_pairs[1:], _else=_else)
 
 
 def lisp_abs(x):
