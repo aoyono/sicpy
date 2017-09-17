@@ -13,47 +13,47 @@ def factorial_recursive(n, s=[]):
     amount of information needed to keep track of it, grows linearly with n (is proportional to n), just like the number
     of steps. Such a process is called a linear recursive process.
     """
-    if eq(n, 1):
-        return 1    # Start to shrink
-    print_shape(n, None, s)
-    fact_n_minus_one = factorial_recursive(sub(n, 1))   # building the chain of deferred operations (expansion)
-    print_shape(n, fact_n_minus_one, s)
-    return mul(n, fact_n_minus_one)     # shrinking continue here
+    def print_shape(fact_n_minus_one):
+        """Print the shape of the linear recursive process of computing factorial"""
+        import re
 
-
-def print_shape(n, fact_n_minus_one, s):
-    """Print the shape of the linear recursive process of computing factorial"""
-    import re
-
-    def print_after():
-        m = re.search(r'\(factorial 1\)', s[0])
-        if m is None:
-            m = re.search(r'\(\* ([0-9]+) ([0-9]+)\)', s[0])
-        str2print = (
-            s[0][0:m.start()]
-            + str(fact_n_minus_one)
-            + s[0][m.end():]
-        )
-        s[0] = str2print
-        print(s[0])
-
-    def print_before():
-        base = '(* {} {})'
-        if not s:
-            s.append(base.format(n, '(factorial %s)' % (sub(n, 1),)))
-        else:
-            m = re.search(r'\(factorial ([0-9]+)\)', s[0])
+        def print_after():
+            m = re.search(r'\(factorial 1\)', s[0])
+            if m is None:
+                m = re.search(r'\(\* ([0-9]+) ([0-9]+)\)', s[0])
             str2print = (
                 s[0][0:m.start()]
-                + base.format(n, '(factorial %s)' % (sub(n, 1),))
+                + str(fact_n_minus_one)
                 + s[0][m.end():]
             )
             s[0] = str2print
-        print(s[0])
-    if fact_n_minus_one is not None:
-        print_after()
-    else:
-        print_before()
+            print(s[0])
+
+        def print_before():
+            base = '(* {} {})'
+            if not s:
+                s.append(base.format(n, '(factorial %s)' % (sub(n, 1),)))
+            else:
+                m = re.search(r'\(factorial ([0-9]+)\)', s[0])
+                str2print = (
+                    s[0][0:m.start()]
+                    + base.format(n, '(factorial %s)' % (sub(n, 1),))
+                    + s[0][m.end():]
+                )
+                s[0] = str2print
+            print(s[0])
+
+        if fact_n_minus_one is not None:
+            print_after()
+        else:
+            print_before()
+
+    if eq(n, 1):
+        return 1
+    print_shape(None)
+    fact_n_minus_one = factorial_recursive(sub(n, 1))   # building the chain of deferred operations (expansion)
+    print_shape(fact_n_minus_one)
+    return mul(n, fact_n_minus_one)     # Start to shrink
 
 
 def factorial_iterative(n):
@@ -78,7 +78,7 @@ def factorial_iterative(n):
 
 
 if __name__ == '__main__':
-    n = 5
+    n = 10
     print('linear-recursive process:', '(factorial {})'.format(n), sep='\n', )
     result = factorial_recursive(n)
     print('{}'.format(result))
