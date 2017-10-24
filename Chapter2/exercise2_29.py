@@ -2,10 +2,9 @@
 """
 https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_thm_2.29
 """
-from operator import or_, not_
 
 from Chapter2.hierarchical_structures import pair
-from Chapter2.lisp_list_structured_data import car, cdr, lisp_list, list_ref
+from Chapter2.lisp_list_structured_data import car, cdr, lisp_list
 from utils import let
 
 
