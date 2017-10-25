@@ -37,3 +37,11 @@ if __name__ == '__main__':
         print(count_leaves(x))
         print('(count-leaves (list x x))')
         print(count_leaves(lisp_list(x, x)))
+
+        import time
+        start = time.time()
+        count_leaves(x)
+        print('First method elapsed time: %s' % (time.time() - start))
+        start = time.time()
+        count_leaves2(x)
+        print('Second method elapsed time: %s' % (time.time() - start))
