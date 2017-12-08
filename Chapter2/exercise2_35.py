@@ -35,13 +35,27 @@ if __name__ == '__main__':
         print('(define x (list 1 (list 2 (list 3 4)) 5))')
         print('(count-leaves x)')
         print(count_leaves(x))
-        print('(count-leaves (list x x))')
-        print(count_leaves(lisp_list(x, x)))
+        print('(count-leaves (list x x x x))')
+        print(count_leaves(lisp_list(x, x, x, x)))
 
         import time
         start = time.time()
         count_leaves(x)
-        print('First method elapsed time: %s' % (time.time() - start))
+        el1 = time.time() - start
+        print('First method elapsed time: %s' % (el1,))
         start = time.time()
         count_leaves2(x)
-        print('Second method elapsed time: %s' % (time.time() - start))
+        el2 = time.time() - start
+        print('Second method elapsed time: %s' % (el2,))
+
+        print('rate:', el2/el1)
+
+        from timeit import Timer
+        cl1 = Timer(stmt='count_leaves(%(x)s)' % locals(), setup='from __main__ import count_leaves')
+        cl2 = Timer(stmt='count_leaves2(%(x)s)' % locals(), setup='from __main__ import count_leaves2')
+        t1 = cl1.timeit()
+        t2 = cl2.timeit()
+        print('timeit result first method: %s' % t1)
+        print('timeit result second method: %s' % t2)
+
+        print('rate:', t2 / t1)
