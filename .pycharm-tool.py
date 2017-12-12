@@ -28,6 +28,15 @@ def next_exercise(chapter, previous, page):
                 '"""\n',
                 url_tpl.format(page=page, chapter=chapter, number=exercise_number),
                 '\n"""\n',
+                '\n',
+                '\n',
+                'def run_the_magic():\n',
+                '    pass\n',
+                '\n',
+                '\n',
+                'if __name__ == "__main__":\n',
+                '    run_the_magic()\n',
+                '\n'
             ])
         except:
             print('Failure : Could not write new file')
