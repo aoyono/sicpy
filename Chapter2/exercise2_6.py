@@ -30,7 +30,7 @@ def add(m, n):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     def greet(name):
         print('Hello %(name)s' % locals())
         return name
@@ -39,3 +39,7 @@ if __name__ == '__main__':
     add(one(), one())(greet)('Paul')
     print('Result of greeting two times a guy named Paul')
     two()(greet)('Paul')
+
+
+if __name__ == '__main__':
+    run_the_magic()

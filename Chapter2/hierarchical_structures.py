@@ -23,7 +23,7 @@ def pair(x):
     return isinstance(x, tuple)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     with let(cons(lisp_list(1, 2), lisp_list(3, 4))) as (x,):
         print('(length x)')
         print(length(x))
@@ -35,3 +35,7 @@ if __name__ == '__main__':
         print(length(lisp_list(x, x)))
         print('(count-leaves (list x x))')
         print(count_leaves(lisp_list(x, x)))
+
+
+if __name__ == '__main__':
+    run_the_magic()

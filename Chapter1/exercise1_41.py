@@ -9,7 +9,7 @@ def double(proc):
     return lambda x: proc(proc(x))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print(
         '((double inc) 1)',
         double(inc)(1),
@@ -20,3 +20,7 @@ if __name__ == '__main__':
         double(double(double))(inc)(5),
         sep='\n'
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

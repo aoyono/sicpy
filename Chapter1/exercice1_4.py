@@ -18,5 +18,9 @@ def a_plus_abs_b(a, b):
     # return (add if gt(b, 0) else sub)(a, b)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print(a_plus_abs_b(3, -6))
+
+
+if __name__ == '__main__':
+    run_the_magic()

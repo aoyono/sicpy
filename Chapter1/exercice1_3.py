@@ -16,6 +16,10 @@ def two_larger(number1, number2, number3):
     return sorted((number1, number2, number3))[1:]
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('The sum of squares of the two larger between (5, 13, 27): %s'
           % (sum_of_squares_of_two_larger(5, 13, 27),))
+
+
+if __name__ == '__main__':
+    run_the_magic()

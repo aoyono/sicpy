@@ -13,6 +13,10 @@ def for_each(func, items):
         for_each(func, cdr(items))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('(for-each (lambda (x) (newline) (display x)) (list 57 321 88))')
     for_each(lambda x: print(x), lisp_list(57, 321, 88))
+
+
+if __name__ == '__main__':
+    run_the_magic()

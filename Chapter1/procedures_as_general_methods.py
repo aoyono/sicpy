@@ -64,7 +64,7 @@ def sqrt(x):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from math import sin, cos
 
     a, b = 2.0, 4.0
@@ -88,3 +88,7 @@ if __name__ == '__main__':
         lambda y: add(sin(y), cos(y)),
         fg
     ))
+
+
+if __name__ == '__main__':
+    run_the_magic()

@@ -40,6 +40,10 @@ def search_for_primes(a, b):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     for a in (1009, 1013, 1019, 10007, 10009, 10037, 100003, 100019, 100043, 1000003, 1000033, 1000037):
         search_for_primes(a, a + 1)
+
+
+if __name__ == '__main__':
+    run_the_magic()

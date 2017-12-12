@@ -39,10 +39,14 @@ def test(x, y):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     try:
         test(0, p())
     except RecursionError:
         print('Python uses application-order evaluation: evaluate the arguments and then apply')
     else:
         print('Python uses normal-order evaluation: fully expand and then reduce')
+
+
+if __name__ == '__main__':
+    run_the_magic()

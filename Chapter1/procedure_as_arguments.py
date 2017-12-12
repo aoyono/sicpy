@@ -109,7 +109,7 @@ def integral(f, a, b, dx):
 # End applications
 
 
-if __name__ == '__main__':
+def run_the_magic():
     a, b = 1, 10
     print(
         '(sum-cubes %(a)s %(b)s)' % locals(),
@@ -139,3 +139,7 @@ if __name__ == '__main__':
         integral(cube, a, b, dx),
         sep='\n'
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

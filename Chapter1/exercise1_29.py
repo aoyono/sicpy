@@ -58,7 +58,7 @@ def integral_simpson(f, a, b, n):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     a, b = 0, 1
     for n in (100, 1000):
         try:
@@ -69,3 +69,7 @@ if __name__ == '__main__':
             )
         except RecursionError:
             print('Recursion error for n = %(n)s' % locals())
+
+
+if __name__ == '__main__':
+    run_the_magic()

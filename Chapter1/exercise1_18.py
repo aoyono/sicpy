@@ -33,11 +33,15 @@ def mult(a, b):
     return mult_iter(a, b, 0)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from timeit import Timer
     b, n = 10, 1000
-    timer = Timer(stmt='mult(%(b)s, %(n)s)' % locals(), setup='from __main__ import mult')
+    timer = Timer(stmt='mult(%(b)s, %(n)s)' % locals(), setup='from Chapter1.exercise1_18 import mult')
     print('(* %(b)s %(n)s)' % locals(), mult(b, n), 'Time: %s' % (timer.timeit(),), sep='\n')
 
-    timer = Timer(stmt='fast_multiply(%(b)s, %(n)s)' % locals(), setup='from __main__ import fast_multiply')
+    timer = Timer(stmt='fast_multiply(%(b)s, %(n)s)' % locals(), setup='from Chapter1.exercise1_18 import fast_multiply')
     print('(fast-multiply %(b)s %(n)s)' % locals(), fast_multiply(b, n), 'Time: %s' % (timer.timeit(),), sep='\n')
+
+
+if __name__ == '__main__':
+    run_the_magic()

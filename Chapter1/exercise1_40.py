@@ -25,7 +25,7 @@ def cubic(a, b, c):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     a, b, c = 1, 2, 3
     print('(newtons-method (cubic %(a)s %(b)s %(c)s) 1)' % locals())
     res = newtons_method(
@@ -35,3 +35,7 @@ if __name__ == '__main__':
     print(res)
     print('((cubic %(a)s %(b)s %(c)s) %(res)s)' % locals())
     print(cubic(a, b, c)(res))
+
+
+if __name__ == '__main__':
+    run_the_magic()

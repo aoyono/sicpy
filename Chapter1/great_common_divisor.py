@@ -13,7 +13,7 @@ def gcd(a, b):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from timeit import Timer
     a, b = 206, 40
     print(
@@ -23,6 +23,10 @@ if __name__ == '__main__':
     )
     timer = Timer(
         stmt='gcd(%(a)s, %(b)s)' % locals(),
-        setup='from __main__ import gcd'
+        setup='from Chapter1.great_common_divisor import gcd'
     )
     print('Mean execution time: %s' %(timer.timeit(),))
+
+
+if __name__ == '__main__':
+    run_the_magic()

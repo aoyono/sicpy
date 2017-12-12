@@ -92,10 +92,14 @@ def is_prime_fast(n, times):
     return False
 
 
-if __name__ == '__main__':
+def run_the_magic():
     n, times = 139, 10
     print(
         '(fast-prime? %(n)s %(times)s)' % locals(),
         is_prime_fast(n, times),
         sep='\n',
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

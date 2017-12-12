@@ -64,7 +64,7 @@ def h(n):
     return ackermann(2, n)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print("(A 1 10)", ackermann(1, 10), sep='\n')
     print("(A 2 4)", ackermann(2, 4), sep='\n')
     print("(A 3 3)", ackermann(3, 3), sep='\n')
@@ -78,3 +78,7 @@ if __name__ == '__main__':
             print("({f.__name__} {i})".format(f=func, i=i), func(i), sep='\n')
         print('---------------------------------------------------------------')
     print(ackermann(3, 1))
+
+
+if __name__ == '__main__':
+    run_the_magic()

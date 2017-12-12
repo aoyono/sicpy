@@ -28,7 +28,7 @@ def lisp_abs(x):
     return lisp_cond((lt(x, 0), -x), _else=x)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print(
         lisp_if(
             1 > 2,
@@ -47,3 +47,7 @@ if __name__ == '__main__':
     print(
         lisp_abs(-5)
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

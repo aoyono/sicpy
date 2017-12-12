@@ -24,8 +24,12 @@ def scale_tree_map(tree, factor):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('scale-tree (list 1 (list 2 (list 3 4) 5) (list 6 7)) 10)')
     print(scale_tree(lisp_list(1, lisp_list(2, lisp_list(3, 4), 5), lisp_list(6, 7)), 10))
     print('scale-tree-map (list 1 (list 2 (list 3 4) 5) (list 6 7)) 10)')
     print(scale_tree_map(lisp_list(1, lisp_list(2, lisp_list(3, 4), 5), lisp_list(6, 7)), 10))
+
+
+if __name__ == '__main__':
+    run_the_magic()

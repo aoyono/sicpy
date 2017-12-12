@@ -35,7 +35,7 @@ def f_iterative(n):
     return f_iter(2, 1, 0, n)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     N = 5
     from timeit import Timer
     for n in range(N + 1):
@@ -43,8 +43,8 @@ if __name__ == '__main__':
         print('(f-recursive %(n)s)' % locals(), f_recursive(n), sep='\n')
         print('(f-iterative %(n)s)' % locals(), f_iterative(n), sep='\n')
 
-        timer_rec = Timer(stmt="f_recursive(%(n)s)" % locals(), setup="from __main__ import f_recursive")
-        timer_iter = Timer(stmt="f_iterative(%(n)s)" % locals(), setup="from __main__ import f_iterative")
+        timer_rec = Timer(stmt="f_recursive(%(n)s)" % locals(), setup="from Chapter1.exercise1_11 import f_recursive")
+        timer_iter = Timer(stmt="f_iterative(%(n)s)" % locals(), setup="from Chapter1.exercise1_11 import f_iterative")
         print(
             'Mean execution time:',
             '\t-(f-recursive %(n)s): {}'.format(timer_rec.timeit()) % locals(),
@@ -52,3 +52,7 @@ if __name__ == '__main__':
             sep='\n',
         )
         print('-' * 20)
+
+
+if __name__ == '__main__':
+    run_the_magic()

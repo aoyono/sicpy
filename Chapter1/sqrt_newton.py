@@ -113,7 +113,7 @@ def sqrt_unified_ls(x):
     return sqrt_iter(1.0)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('(sqrt 9) : %s\n(sqrt (+ 100 37)) : %s\n(sqrt (+ (sqrt 2) (sqrt 3))) : %s\n(square (sqrt 1000)) : %s\n' % (
         sqrt(9),
         sqrt(add(100, 37)),
@@ -126,3 +126,7 @@ if __name__ == '__main__':
         "(square (sqrt_unified_ls 1000)) : {}".format(square(sqrt_unified_ls(1000)),),
         sep='\n',
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

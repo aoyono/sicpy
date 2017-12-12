@@ -32,12 +32,16 @@ def expt(b, n):
     return expt_iter(b, n, 1)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from timeit import Timer
     b, n = 2, 20000
-    timer = Timer(stmt='expt(%(b)s, %(n)s)' % locals(), setup='from __main__ import expt')
+    timer = Timer(stmt='expt(%(b)s, %(n)s)' % locals(), setup='from Chapter1.exercise1_16 import expt')
     print('(expt %(b)s %(n)s)' % locals(), expt(b, n), 'Time: %s' % (timer.timeit(),), sep='\n')
 
     from Chapter1.exponentiation import fast_expt
     timer = Timer(stmt='fast_expt(%(b)s, %(n)s)' % locals(), setup='from Chapter1.exponentiation import fast_expt')
     print('(fast-expt %(b)s %(n)s)' % locals(), fast_expt(b, n), 'Time: %s' % (timer.timeit(),), sep='\n')
+
+
+if __name__ == '__main__':
+    run_the_magic()

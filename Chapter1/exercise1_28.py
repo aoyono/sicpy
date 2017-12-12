@@ -53,7 +53,7 @@ def miller_rabin_test(n):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     carmichael_numbers = [
         561,
         1105,
@@ -71,3 +71,7 @@ if __name__ == '__main__':
 
     for a in (2, 3, 5, 7, 11, 13, 17, 19, 23, 37):
         print(miller_rabin_test(a))
+
+
+if __name__ == '__main__':
+    run_the_magic()

@@ -77,14 +77,16 @@ def run_the_magic(filename):
     magic_work(filename)
 
 
-@master_command.command()
-def run_all_the_magic():
+def run_in_threads(target):
     thread_list = [
         threading.Thread(
-            target=magic_work, args=(os.path.join(chapter, module_name),), name='.'.join((chapter, module_name))
+            target=target, args=(os.path.join(chapter, module_name),), name='.'.join((chapter, module_name))
         )
         for chapter in get_chapters()
-        for module_name in os.listdir(chapter)
+        for module_name in filter(
+            lambda x: all((not os.path.isdir(x), not x.endswith('.pyc'), not os.path.basename(x).startswith('.'))),
+            os.listdir(chapter)
+        )
     ]
     for thread in thread_list:
         click.echo('start running thread {}'.format(thread.name))
@@ -96,8 +98,13 @@ def run_all_the_magic():
 
 
 @master_command.command()
+def run_all_the_magic():
+    run_in_threads(magic_work)
+
+
+@master_command.command()
 def build_rtm():
-    def runner(filename):
+    def rtm_runner(filename):
         with open(filename, 'r') as fd:
             lines = fd.readlines()
         # Saving a copy of the data
@@ -122,22 +129,7 @@ def build_rtm():
                 with open(filename, 'w') as fd:
                     fd.writelines(lines)
 
-    thread_list = [
-        threading.Thread(
-            target=runner, args=(os.path.join(chapter, module_name),), name='.'.join((chapter, module_name))
-        )
-        for chapter in get_chapters()
-        for module_name in filter(
-            lambda x: all((not os.path.isdir(x), not x.endswith('.pyc'), not x.startswith('.'))), os.listdir(chapter)
-        )
-    ]
-    for thread in thread_list:
-        click.echo('start running thread {}'.format(thread.name))
-        thread.start()
-
-    for thread in thread_list:
-        thread.join()
-        click.echo('thread {} terminated'.format(thread.name))
+    run_in_threads(rtm_runner)
 
 
 @master_command.command()

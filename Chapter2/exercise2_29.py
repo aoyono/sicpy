@@ -67,7 +67,7 @@ def branch_weight(branch):
         return bs
 
 
-if __name__ == '__main__':
+def run_the_magic():
     m1 = make_mobile(
         make_branch(4, 2),
         make_branch(4, 2)
@@ -87,3 +87,7 @@ if __name__ == '__main__':
     print(is_balanced(m1))
     print('(is-balanced m2)')
     print(is_balanced(m2))
+
+
+if __name__ == '__main__':
+    run_the_magic()

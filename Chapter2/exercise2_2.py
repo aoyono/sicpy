@@ -54,7 +54,7 @@ def midpoint_segment(ab):
 # End using the two objects in another system
 
 
-if __name__ == '__main__':
+def run_the_magic():
     a = make_point(1, 2)
     b = make_point(4, -1)
     ab = make_segment(a, b)
@@ -65,3 +65,7 @@ if __name__ == '__main__':
     print_point(b)
     print('(print-point midpoint)')
     print_point(midpoint)
+
+
+if __name__ == '__main__':
+    run_the_magic()

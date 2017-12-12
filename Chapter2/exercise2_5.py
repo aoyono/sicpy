@@ -31,7 +31,7 @@ def cdr(z):
     return extract_expt(3, z)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     a, b = 2, 3
     x = cons(a, b)
     print('(define x (cons %(a)s %(b)s))' % locals())
@@ -39,3 +39,7 @@ if __name__ == '__main__':
     print(car(x))
     print('(cdr x)')
     print(cdr(x))
+
+
+if __name__ == '__main__':
+    run_the_magic()

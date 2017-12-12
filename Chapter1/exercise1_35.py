@@ -17,10 +17,14 @@ def golden_ratio():
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print("(golden-ratio)")
     print(golden_ratio())
     print("(/ (+ 1 (sqrt 5)) 2))")
     print((1 + math.sqrt(5))/2)
     print("(- (golden-ratio) (/ (+ 1 (sqrt 5)) 2)))")
     print(golden_ratio() - (1 + math.sqrt(5))/2)
+
+
+if __name__ == '__main__':
+    run_the_magic()

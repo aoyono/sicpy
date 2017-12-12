@@ -14,6 +14,10 @@ def horner_eval(x, coefficient_sequence):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('(horner-eval 2 (list 1 3 0 5 0 1))')
     print(horner_eval(2, lisp_list(1, 3, 0, 5, 0, 1)))
+
+
+if __name__ == '__main__':
+    run_the_magic()

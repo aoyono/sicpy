@@ -70,9 +70,13 @@ def product_relatively_prime(n):
 # Applications
 
 
-if __name__ == '__main__':
+def run_the_magic():
     a, b, n = 0, 2, 5
     print('(sum-square-primes %(a)s %(b)s)' % locals())
     print(sum_square_primes(a, b))
     print('(product-relative-primes %(n)s)' % locals())
     print(product_relatively_prime(n))
+
+
+if __name__ == '__main__':
+    run_the_magic()

@@ -16,8 +16,12 @@ def tan_cf(x, k):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     import math
     x, k = math.radians(90), 100
     print("(tan-cf %(x)s %(k)s)" % locals())
     print(tan_cf(x, k))
+
+
+if __name__ == '__main__':
+    run_the_magic()

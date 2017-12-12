@@ -2,7 +2,7 @@
 """
 https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_thm_2.18
 """
-from Chapter2.lisp_list_structured_data import car, cdr, cons, lisp_list
+from Chapter2.lisp_list_structured_data import car, cdr, cons, lisp_list, print_lisp_list
 
 
 def reverse(l):
@@ -14,6 +14,12 @@ def reverse(l):
     return iterate(l, lisp_list())
 
 
+def run_the_magic():
+    print('(list 1 4 9 16 25)')
+    print_lisp_list(lisp_list(1, 4, 9, 16, 25))
+    print('(reverse (list 1 4 9 16 25))')
+    print_lisp_list(reverse(lisp_list(1, 4, 9, 16, 25)))
+
+
 if __name__ == '__main__':
-    print(lisp_list(1, 4, 9, 16, 25))
-    print(reverse(lisp_list(1, 4, 9, 16, 25)))
+    run_the_magic()

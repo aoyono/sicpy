@@ -26,7 +26,7 @@ def fixed_point(f, first_guess):
     return try_(first_guess)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from math import log
     fg = 2.0
     print("(fixed-point (lambda (x) (/ (log 1000) (log x))) %(fg)s)" % locals())
@@ -41,3 +41,7 @@ if __name__ == '__main__':
         lambda x: average(x, truediv(log(1000), log(x))),
         fg
     ))
+
+
+if __name__ == '__main__':
+    run_the_magic()

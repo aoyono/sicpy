@@ -9,25 +9,35 @@ IBM 704. That machine had an addressing scheme that allowed one to reference the
 a memory location. Car stands for ``Contents of Address part of Register'' and cdr (pronounced ``could-er'') stands for
 ``Contents of Decrement part of Register.''
 """
+from operator import add
+
 from Chapter1.exercise1_9 import inc
+
+nil = tuple
 
 
 def cons(a, b):
     return tuple((a, b))
 
 
+def _get_tuple_element(instance, position):
+    """Helper method to ensure we don't have errors while getting items from a tuple"""
+    if isinstance(instance, tuple) and position < len(instance):
+        return instance[position]
+
+
 def car(pair):
-    return pair[0]
+    return _get_tuple_element(pair, 0)
 
 
 def cdr(pair):
-    return pair[1]
+    return _get_tuple_element(pair, 1)
 
 
 # In addition to these, we also give an implementation of Lisp list structure
 def lisp_list(*args):
     if not args:
-        return None
+        return nil()
     return cons(args[0], lisp_list(*args[1:]))
 
 
@@ -41,24 +51,73 @@ def list_ref(items, n):
 
 
 def length(items):
-    if items is None:
+    if items is nil():
         return 0
     return 1 + length(cdr(items))
 
 
 def rlength(items):
     """Recursive implementation of length"""
+
     def rlength_iter(a, count):
-        if a is None:
+        if a is nil():
             return count
         return rlength_iter(cdr(a), inc(count))
+
     return rlength_iter(items, 0)
 
 
 def append(list1, list2):
-    if list1 is None:
+    if list1 is nil():
         return list2
     return cons(
         car(list1),
         append(cdr(list1), list2)
     )
+
+
+def repr_lisp_list(l):
+    """A function that helps representing our implementation of lisp lists"""
+
+    def reverse(l):
+        """We can't import reverse from exercise2_18 as itself imports from this module"""
+
+        def iterate(items, acc):
+            if items is nil():
+                return acc
+            return iterate(cdr(items), cons(car(items), acc))
+
+        return iterate(l, lisp_list())
+
+    def accumulate(op, initial, sequence):
+        """We can't import accumulate from sequences_as_conventional_interfaces as itself imports from this module"""
+        if sequence is nil():
+            return initial
+        return op(
+            car(sequence),
+            accumulate(
+                op,
+                initial,
+                cdr(sequence)
+            )
+        )
+
+    def pair(x):
+        """Can't import this from hierarchical_structures as itself imports this module"""
+        return isinstance(x, tuple)
+
+    return add(
+        '(',
+        add(
+            accumulate(
+                lambda i, s: s + ' ' + (repr_lisp_list(i) if pair(i) else str(i) if i is not None else ''),
+                '',
+                reverse(l)
+            ),
+            ')'
+        )
+    )
+
+
+def print_lisp_list(l):
+    print(repr_lisp_list(l))

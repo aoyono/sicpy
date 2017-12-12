@@ -16,7 +16,7 @@ def f(a):
     )
 
 
-def main():
+def run_the_magic():
     print(square(21))
     print(square(add(2, 5)))
     print(square(square(3)))
@@ -25,4 +25,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_the_magic()

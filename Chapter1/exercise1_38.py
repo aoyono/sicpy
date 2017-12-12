@@ -27,7 +27,7 @@ def approx_e(k):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from math import e
 
     k = 1
@@ -44,3 +44,7 @@ if __name__ == '__main__':
 
     print("(e)")
     print(e)
+
+
+if __name__ == '__main__':
+    run_the_magic()

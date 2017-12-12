@@ -27,10 +27,14 @@ def pascal_triangle_recursive(line, column):
     return pascal_triangle_recursive(sub(line, 1), column) + pascal_triangle_recursive(sub(line, 1), sub(column, 1))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     line, column = 1, 3
     print(
         '(pascal-recursive %(line)s %(column)s)' % locals(),
         pascal_triangle_recursive(line, column),
         sep='\n',
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

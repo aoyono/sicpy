@@ -47,7 +47,11 @@ def sqrt(x):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     x = 10000.0
     print('(sqrt %(x)s)' % locals())
     print(sqrt(x))
+
+
+if __name__ == '__main__':
+    run_the_magic()

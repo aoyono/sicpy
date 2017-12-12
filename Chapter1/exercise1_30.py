@@ -128,44 +128,46 @@ def integral_simpson(f, a, b, n):
 # End applications
 
 
+def run_the_magic():
+    a, b = 1, 10
+    print(
+        '(sum-cubes %(a)s %(b)s)' % locals(),
+        sum_cubes(a, b),
+        sep='\n'
+    )
+    print(
+        '(sum-integers %(a)s %(b)s)' % locals(),
+        sum_integers(a, b),
+        sep='\n'
+    )
+    b = 1000
+    print(
+        '(* 8 (pi-sum %(a)s %(b)s))' % locals(),
+        mul(8, pi_sum(a, b)),
+        sep='\n'
+    )
+    a, b, dx = 0, 1, 0.1
+    print(
+        '(integral cube %(a)s %(b)s %(dx)s)' % locals(),
+        integral(cube, a, b, dx),
+        sep='\n'
+    )
+    dx = 0.01
+    print(
+        '(integral cube %(a)s %(b)s %(dx)s)' % locals(),
+        integral(cube, a, b, dx),
+        sep='\n'
+    )
+    a, b = 0, 1
+    for n in (100, 1000):
+        try:
+            print(
+                '(integral-simpson cube %(a)s %(b)s %(n)s)' % locals(),
+                integral_simpson(cube, a, b, n),
+                sep='\n'
+            )
+        except RecursionError:
+            print('Recursion error for n = %(n)s' % locals())
+
 if __name__ == '__main__':
-    if __name__ == '__main__':
-        a, b = 1, 10
-        print(
-            '(sum-cubes %(a)s %(b)s)' % locals(),
-            sum_cubes(a, b),
-            sep='\n'
-        )
-        print(
-            '(sum-integers %(a)s %(b)s)' % locals(),
-            sum_integers(a, b),
-            sep='\n'
-        )
-        b = 1000
-        print(
-            '(* 8 (pi-sum %(a)s %(b)s))' % locals(),
-            mul(8, pi_sum(a, b)),
-            sep='\n'
-        )
-        a, b, dx = 0, 1, 0.1
-        print(
-            '(integral cube %(a)s %(b)s %(dx)s)' % locals(),
-            integral(cube, a, b, dx),
-            sep='\n'
-        )
-        dx = 0.01
-        print(
-            '(integral cube %(a)s %(b)s %(dx)s)' % locals(),
-            integral(cube, a, b, dx),
-            sep='\n'
-        )
-        a, b = 0, 1
-        for n in (100, 1000):
-            try:
-                print(
-                    '(integral-simpson cube %(a)s %(b)s %(n)s)' % locals(),
-                    integral_simpson(cube, a, b, n),
-                    sep='\n'
-                )
-            except RecursionError:
-                print('Recursion error for n = %(n)s' % locals())
+    run_the_magic()

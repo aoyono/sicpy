@@ -26,7 +26,7 @@ def cube_root(x):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     f, x = square.__name__, 100
     print('((average-damp %(f)s) %(x)s)' % locals())
     print(average_damp(square)(x))
@@ -34,3 +34,7 @@ if __name__ == '__main__':
     print(sqrt(x))
     print('(cube-root %(x)s)' % locals())
     print(cube_root(x))
+
+
+if __name__ == '__main__':
+    run_the_magic()

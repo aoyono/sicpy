@@ -57,7 +57,7 @@ def sqrt(x):
     return sqrt_iter(1.0, x)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('Testing new_if ...')
     print(
         new_if(
@@ -77,3 +77,7 @@ if __name__ == '__main__':
     print(
         sqrt(10000)
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

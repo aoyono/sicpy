@@ -192,6 +192,10 @@ See https://en.wikipedia.org/wiki/Interval_arithmetic#Dependency_problem
 # End Exercise2.16
 
 
-if __name__ == '__main__':
+def run_the_magic():
     show_that_width_x_plus_y_is_a_function_of_widths_of_x_and_y()
     demonstrate_that_lem_is_rigth()
+
+
+if __name__ == '__main__':
+    run_the_magic()

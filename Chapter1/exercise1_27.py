@@ -32,7 +32,7 @@ def fools_fermat_test2(n):
     return True
 
 
-if __name__ == '__main__':
+def run_the_magic():
     carmichael_numbers = [
         561,
         1105,
@@ -47,3 +47,7 @@ if __name__ == '__main__':
             print(fools_fermat_test(n))
         except RecursionError:
             print(fools_fermat_test2(n))
+
+
+if __name__ == '__main__':
+    run_the_magic()

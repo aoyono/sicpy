@@ -64,7 +64,7 @@ def print_rat(x):
     print('{}/{}'.format(numer(x), denom(x)))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     def one_half(): return make_rat(1, 2)
     print('(print-rat one-half)')
     print_rat(one_half())
@@ -91,3 +91,7 @@ if __name__ == '__main__':
             one_third()
         )
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

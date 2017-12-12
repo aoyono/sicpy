@@ -26,8 +26,12 @@ def deep_reverse(x):
     return iterate(x, lisp_list())
 
 
-if __name__ == '__main__':
+def run_the_magic():
     with let(lisp_list(lisp_list(1, 2), lisp_list(3, 4))) as (x,):
         print(x)
         print(reverse(x))
         print(deep_reverse(x))
+
+
+if __name__ == '__main__':
+    run_the_magic()

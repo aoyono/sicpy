@@ -39,6 +39,10 @@ def first_denomination(coin_values):
     return car(coin_values)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('(cc 100 us-coins)')
     print(cc(100, us_coins()))
+
+
+if __name__ == '__main__':
+    run_the_magic()

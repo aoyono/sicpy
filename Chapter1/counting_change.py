@@ -58,8 +58,13 @@ def first_denomination(kinds_of_coins):
     if eq(kinds_of_coins, 5):
         return 50
 
-if __name__ == '__main__':
+
+def run_the_magic():
     from timeit import Timer
-    timer = Timer(stmt="count_change(100)", setup="from __main__ import count_change")
+    timer = Timer(stmt="count_change(100)", setup="from Chapter1.counting_change import count_change")
     print(count_change(100))
     print("This response takes average time of %s seconds to compute" % (timer.timeit(),))
+
+
+if __name__ == '__main__':
+    run_the_magic()

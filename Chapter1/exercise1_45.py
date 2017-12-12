@@ -27,7 +27,11 @@ def nth_root(x, n):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     x, n = math.pow(3, 9), 9
     print('(nth-root %(x)s %(n)s)' % locals())
     print(nth_root(x, n))
+
+
+if __name__ == '__main__':
+    run_the_magic()

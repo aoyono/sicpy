@@ -20,5 +20,9 @@ def subsets(s):
             )
         )
 
-if __name__ == '__main__':
+def run_the_magic():
     print(subsets(lisp_list(1, 2, 3)))
+
+
+if __name__ == '__main__':
+    run_the_magic()

@@ -45,5 +45,9 @@ def cube(x):
     return mul(square(x), x)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print(cube_root(27))
+
+
+if __name__ == '__main__':
+    run_the_magic()

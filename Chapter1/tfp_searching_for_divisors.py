@@ -27,10 +27,14 @@ def is_prime(n):
     return eq(n, smallest_divisor(n))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     n = 17
     print(
         '(prime? %(n)s)' % locals(),
         is_prime(n),
         sep='\n',
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

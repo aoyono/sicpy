@@ -61,29 +61,29 @@ def fib(n):
     return fib_iter(1, 0, 0, 1, n)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from timeit import Timer
 
     n = 20
 
-    timer = Timer(stmt='fib(%(n)s)' % locals(), setup='from __main__ import fib')
+    timer = Timer(stmt='fib(%(n)s)' % locals(), setup='from Chapter1.exercise1_19 import fib')
     print('(fib %(n)s)' % locals(), fib(n), 'Time: %s' % (timer.timeit(),), sep='\n')
 
     from Chapter1.tree_recursion import fib_iterative
-    timer = Timer(stmt='fib_iterative(%(n)s)' % locals(), setup='from __main__ import fib_iterative')
+    timer = Timer(stmt='fib_iterative(%(n)s)' % locals(), setup='from Chapter1.tree_recursion import fib_iterative')
     print('(fib-iterative %(n)s)' % locals(), fib_iterative(n), 'Time: %s' % (timer.timeit(),), sep='\n')
 
     def time_generator():
         for p in range(n):
-            yield Timer(stmt='fib(%(p)s)' % locals(), setup='from __main__ import fib').timeit()
+            yield Timer(stmt='fib(%(p)s)' % locals(), setup='from Chapter1.exercise1_19 import fib').timeit()
 
     ns = [p for p in range(n + 1)]
     times_fib = [
-        Timer(stmt='fib(%(p)s)' % locals(), setup='from __main__ import fib').timeit()
+        Timer(stmt='fib(%(p)s)' % locals(), setup='from Chapter1.exercise1_19 import fib').timeit()
         for p in ns
     ]
     times_fibi = [
-        Timer(stmt='fib_iterative(%(p)s)' % locals(), setup='from __main__ import fib_iterative').timeit()
+        Timer(stmt='fib_iterative(%(p)s)' % locals(), setup='from Chapter1.tree_recursion import fib_iterative').timeit()
         for p in ns
     ]
 
@@ -98,3 +98,7 @@ if __name__ == '__main__':
     plt.ylabel('mean computation time (s)')
 
     plt.show()
+
+
+if __name__ == '__main__':
+    run_the_magic()

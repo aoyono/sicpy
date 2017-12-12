@@ -42,7 +42,7 @@ def cont_frac_iter(n, d, k):
     return iterate(k, 0)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from Chapter1.exercise1_35 import golden_ratio
     from Chapter1.exercise1_32 import inv
 
@@ -65,3 +65,7 @@ if __name__ == '__main__':
 
     print("(/ 1 (golden-ratio)))")
     print(inv(golden_ratio()))
+
+
+if __name__ == '__main__':
+    run_the_magic()

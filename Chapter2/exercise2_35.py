@@ -30,7 +30,7 @@ def count_leaves2(tree):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     with let(lisp_list(1, lisp_list(2, lisp_list(3, 4)), 5)) as (x,):
         print('(define x (list 1 (list 2 (list 3 4)) 5))')
         print('(count-leaves x)')
@@ -51,11 +51,15 @@ if __name__ == '__main__':
         print('rate:', el2/el1)
 
         from timeit import Timer
-        cl1 = Timer(stmt='count_leaves(%(x)s)' % locals(), setup='from __main__ import count_leaves')
-        cl2 = Timer(stmt='count_leaves2(%(x)s)' % locals(), setup='from __main__ import count_leaves2')
+        cl1 = Timer(stmt='count_leaves(%(x)s)' % locals(), setup='from Chapter2.exercise2_35 import count_leaves')
+        cl2 = Timer(stmt='count_leaves2(%(x)s)' % locals(), setup='from Chapter2.exercise2_35 import count_leaves2')
         t1 = cl1.timeit()
         t2 = cl2.timeit()
         print('timeit result first method: %s' % t1)
         print('timeit result second method: %s' % t2)
 
         print('rate:', t2 / t1)
+
+
+if __name__ == '__main__':
+    run_the_magic()

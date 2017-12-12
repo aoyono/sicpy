@@ -82,10 +82,14 @@ def search_for_primes(a, b):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     b = 100000000000000000
     for a in (1000, 10000, 100000, 1000000):
         try:
             search_for_primes(a, b)
         except RecursionError:
             continue
+
+
+if __name__ == '__main__':
+    run_the_magic()

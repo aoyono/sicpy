@@ -34,24 +34,24 @@ def fermat_test(n):
     )
 
 
-def is_prime_fast(n, times):
+def prime_fast(n, times):
     # print('%(times)s times left' % locals())
     if eq(times, 0):
         return True
     if fermat_test(n):
-        return is_prime_fast(
+        return prime_fast(
             n,
             sub(times, 1)
         )
     return False
 
 
-if __name__ == '__main__':
+def run_the_magic():
     n, times = 139, 10
     for n in (1009, 1013, 1019, 10007, 10009, 10037, 100003, 100019, 100043, 1000003, 1000033, 1000037):
         print(
             '(fast-prime? %(n)s %(times)s)' % locals(),
-            is_prime_fast(n, times),
+            prime_fast(n, times),
             sep='\n',
         )
 
@@ -62,3 +62,7 @@ if __name__ == '__main__':
             is_prime_fast(n, times),
             sep='\n',
         )
+
+
+if __name__ == '__main__':
+    run_the_magic()

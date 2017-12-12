@@ -77,7 +77,7 @@ def factorial_iterative(n):
     return fact_iter(1, 1, n)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     n = 10
     print('linear-recursive process:', '(factorial {})'.format(n), sep='\n', )
     result = factorial_recursive(n)
@@ -85,3 +85,7 @@ if __name__ == '__main__':
     print('linear-iterative process:', '(factorial {})'.format(n), sep='\n')
     result = factorial_iterative(n)
     print('{}'.format(result))
+
+
+if __name__ == '__main__':
+    run_the_magic()

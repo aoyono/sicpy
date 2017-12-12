@@ -15,6 +15,10 @@ def repeated(f, n):
     return compose(f, repeated(f, dec(n)))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('((repeated square 2) 5)')
     print(repeated(square, 2)(5))
+
+
+if __name__ == '__main__':
+    run_the_magic()

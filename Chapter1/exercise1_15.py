@@ -43,8 +43,12 @@ def sine(angle):
     return p(sine(truediv(angle, 3.0)))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     import math
     a = math.radians(math.degrees(12.15))
     print('(sine %(a)s)' % locals())
     print(sine(a))
+
+
+if __name__ == '__main__':
+    run_the_magic()

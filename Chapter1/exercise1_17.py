@@ -41,11 +41,16 @@ def fast_multiply(a, b):
     return add(a, fast_multiply(a, sub(b, 1)))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from timeit import Timer
     b, n = 1000, 831
-    timer = Timer(stmt='multiply(%(b)s, %(n)s)' % locals(), setup='from __main__ import multiply')
+    timer = Timer(stmt='multiply(%(b)s, %(n)s)' % locals(), setup='from Chapter1.exercise1_17 import multiply')
     print('(* %(b)s %(n)s)' % locals(), multiply(b, n), 'Time: %s' % (timer.timeit(),), sep='\n')
 
-    timer = Timer(stmt='fast_multiply(%(b)s, %(n)s)' % locals(), setup='from __main__ import fast_multiply')
+    timer = Timer(stmt='fast_multiply(%(b)s, %(n)s)' % locals(),
+                  setup='from Chapter1.exercise1_17 import fast_multiply')
     print('(fast-multiply %(b)s %(n)s)' % locals(), fast_multiply(b, n), 'Time: %s' % (timer.timeit(),), sep='\n')
+
+
+if __name__ == '__main__':
+    run_the_magic()

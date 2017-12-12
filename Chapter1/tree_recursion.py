@@ -35,13 +35,17 @@ def fib_iterative(n):
     return fib_iter(1, 0, n)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from timeit import Timer
 
-    timer_LR = Timer(stmt='fib_recursive(5)', setup='from __main__ import fib_recursive')
-    timer_LI = Timer(stmt='fib_iterative(5)', setup='from __main__ import fib_iterative')
+    timer_LR = Timer(stmt='fib_recursive(5)', setup='from Chapter1.tree_recursion import fib_recursive')
+    timer_LI = Timer(stmt='fib_iterative(5)', setup='from Chapter1.tree_recursion import fib_iterative')
 
     print('fib(5) (recursive) = {}'.format(fib_recursive(5)), 'fib(5) (iterative) = {}'.format(fib_iterative(5)),
           sep='\n')
 
     print('Execution times: \n\t- recursive: %s\n\t- iterative: %s' % (timer_LR.timeit(), timer_LI.timeit()))
+
+
+if __name__ == '__main__':
+    run_the_magic()

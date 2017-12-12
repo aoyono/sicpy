@@ -84,9 +84,13 @@ def pi_wallis(n):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     n = 995
     print('(factorial {})'.format(n))
     print(factorial(n))
     print('(pi-wallis %(n)s)' % locals())
     print(pi_wallis(n))
+
+
+if __name__ == '__main__':
+    run_the_magic()

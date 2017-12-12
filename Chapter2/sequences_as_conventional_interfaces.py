@@ -6,13 +6,13 @@ from operator import add, mul
 from Chapter1.compound_procedures import square
 from Chapter1.exercise1_19 import fib
 from Chapter2.hierarchical_structures import pair
-from Chapter2.lisp_list_structured_data import append, car, cdr, cons, lisp_list
+from Chapter2.lisp_list_structured_data import append, car, cdr, cons, lisp_list, nil, print_lisp_list
 from Chapter2.mapping_over_lists import map
 from utils import let
 
 
 def sum_odd_squares(tree):
-    if tree is None:
+    if tree is nil():
         return 0
     if not pair(tree):
         if odd(tree):
@@ -46,7 +46,7 @@ def even_fibs(n):
 
 
 def filter(predicate, sequence):
-    if sequence is None:
+    if sequence is nil():
         return lisp_list()
     if predicate(car(sequence)):
         return cons(
@@ -63,7 +63,7 @@ def filter(predicate, sequence):
 
 
 def accumulate(op, initial, sequence):
-    if sequence is None:
+    if sequence is nil():
         return initial
     return op(
         car(sequence),
@@ -88,7 +88,7 @@ def enumerate_interval(low, high):
 
 
 def enumerate_tree(tree):
-    if tree is None:
+    if tree is nil():
         return lisp_list()
     if not pair(tree):
         return lisp_list(tree)
@@ -154,19 +154,19 @@ def product_of_squares_of_odd_elements(sequence):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('(filter odd? (list 1 2 3 4 5))')
-    print(filter(odd, lisp_list(1, 2, 3, 4, 5)))
+    print_lisp_list(filter(odd, lisp_list(1, 2, 3, 4, 5)))
     print('(accumulate + 0 (list 1 2 3 4 5))')
     print(accumulate(add, 0, lisp_list(1, 2, 3, 4, 5)))
     print('(accumulate * 1 (list 1 2 3 4 5))')
     print(accumulate(mul, 1, lisp_list(1, 2, 3, 4, 5)))
     print('(accumulate cons nil (list 1 2 3 4 5))')
-    print(accumulate(cons, lisp_list(), lisp_list(1, 2, 3, 4, 5)))
+    print_lisp_list(accumulate(cons, lisp_list(), lisp_list(1, 2, 3, 4, 5)))
     print('(enumerate-interval 2 7)')
-    print(enumerate_interval(2, 7))
+    print_lisp_list(enumerate_interval(2, 7))
     print('(enumerate-tree (list 1 (list 2 (list 3 4)) 5))')
-    print(enumerate_tree(lisp_list(
+    print_lisp_list(enumerate_tree(lisp_list(
         1,
         lisp_list(
             2,
@@ -178,8 +178,12 @@ if __name__ == '__main__':
         )
     )))
     print('(list-fib-squares 10)')
-    print(list_fib_squares(10))
+    print_lisp_list(list_fib_squares(10))
     print('(product-of-squares-of-odd-elements (list 1 2 3 4 5))')
     print(product_of_squares_of_odd_elements(
         lisp_list(1, 2, 3, 4, 5)
     ))
+
+
+if __name__ == '__main__':
+    run_the_magic()

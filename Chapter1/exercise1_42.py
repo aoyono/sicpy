@@ -10,7 +10,11 @@ def compose(f, g):
     return lambda x: f(g(x))
 
 
-if __name__ == '__main__':
+def run_the_magic():
     f, g, x = square, inc, 6
     print('((compose %s %s) %s)' % (f.__name__, g.__name__, x))
     print(compose(f, g)(x))
+
+
+if __name__ == '__main__':
+    run_the_magic()

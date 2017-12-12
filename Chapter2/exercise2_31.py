@@ -19,7 +19,7 @@ def square_tree(tree):
     return tree_map(square, tree)
 
 
-if __name__ == '__main__':
+def run_the_magic():
     print('(square-tree (list 1 (list 2 (list 3 4) 5) (list 6 7))')
     print(
         square_tree(
@@ -40,3 +40,7 @@ if __name__ == '__main__':
             )
         )
     )
+
+
+if __name__ == '__main__':
+    run_the_magic()

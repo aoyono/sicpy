@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 """
-from operator import sub, mul, eq, truediv, mod
+from operator import eq, mod, mul, sub, truediv
 
 from cachetools import LRUCache, cached
 
@@ -21,6 +21,7 @@ def linear_recursive_exp(b, n):
         if counter == 0:
             return product
         return exp_iter(base, sub(counter, 1), mul(base, product))
+
     return exp_iter(b, n, 1)
 
 
@@ -42,15 +43,21 @@ def fast_expt(b, n):
     )
 
 
-if __name__ == '__main__':
+def run_the_magic():
     from timeit import Timer
     b, n = 2, 300
-    timer_naive = Timer(stmt='naive_exp(%(b)s, %(n)s)' % locals(), setup='from __main__ import naive_exp')
+    timer_naive = Timer(stmt='naive_exp(%(b)s, %(n)s)' % locals(),
+                        setup='from Chapter1.exponentiation import naive_exp')
     timer_iter = Timer(
         stmt='linear_recursive_exp(%(b)s, %(n)s)' % locals(),
-        setup='from __main__ import linear_recursive_exp'
+        setup='from Chapter1.exponentiation import linear_recursive_exp'
     )
-    timer_fast = Timer(stmt='fast_expt(%(b)s, %(n)s)' % locals(), setup='from __main__ import fast_expt')
+    timer_fast = Timer(stmt='fast_expt(%(b)s, %(n)s)' % locals(), setup='from Chapter1.exponentiation import fast_expt')
     print('(naive_exp %(b)s %(n)s)' % locals(), naive_exp(b, n), 'Time: %s' % (timer_naive.timeit(),), sep='\n')
-    print('(linear_recursive_exp %(b)s %(n)s)' % locals(), linear_recursive_exp(b, n), 'Time: %s' % (timer_iter.timeit(),), sep='\n')
+    print('(linear_recursive_exp %(b)s %(n)s)' % locals(), linear_recursive_exp(b, n),
+          'Time: %s' % (timer_iter.timeit(),), sep='\n')
     print('(fast_exp %(b)s %(n)s)' % locals(), fast_expt(b, n), 'Time: %s' % (timer_fast.timeit(),), sep='\n')
+
+
+if __name__ == '__main__':
+    run_the_magic()
