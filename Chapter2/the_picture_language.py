@@ -5,7 +5,12 @@ import turtle
 
 from Chapter2.exercise2_23 import for_each
 from Chapter2.lisp_list_structured_data import cadr, car, cddr, cdr, cons, lisp_list, list_ref
-from utils import let, board
+from utils import let
+
+
+board = turtle.Screen()
+board.setup(width=500, height=500)
+board.title('The picture language - SICP')
 
 
 def wave():
