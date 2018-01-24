@@ -2,13 +2,13 @@
 """
 https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_thm_2.23
 """
-from Chapter2.lisp_list_structured_data import car, cdr, length, lisp_list
+from Chapter2.lisp_list_structured_data import car, cdr, lisp_list, nil
 from utils import let
 
 
 def for_each(func, items):
-    if items is None:
-        return None
+    if items is nil():
+        return nil()
     with let(func(car(items))):
         for_each(func, cdr(items))
 

@@ -50,6 +50,21 @@ def list_ref(items, n):
     )
 
 
+def cadr(pair):
+    """alias for car(cdr(pair))"""
+    return _get_tuple_element(cdr(pair), 0)
+
+
+def caddr(pair):
+    """alias for car(cdr(cdr(pair)))"""
+    return cadr(cdr(pair))
+
+
+def cddr(pair):
+    """alias for cdr(cdr(pair))"""
+    return cdr(cdr(pair))
+
+
 def length(items):
     if items is nil():
         return 0
