@@ -3,20 +3,73 @@
 """
 import turtle
 
+from Chapter2.exercise2_18 import reverse
 from Chapter2.exercise2_23 import for_each
-from Chapter2.lisp_list_structured_data import cadr, car, cddr, cdr, cons, lisp_list, list_ref
+from Chapter2.lisp_list_structured_data import append, cadr, car, cddr, cdr, cons, lisp_list, list_ref, nil
 from utils import let
 
-
 board = turtle.Screen()
-board.setup(width=500, height=500)
+board.setup(width=500, height=500, startx=0, starty=0)
 board.title('The picture language - SICP')
+board.setworldcoordinates(0, 500, 500, 0)
 
 
-def wave():
+# Taken from http://wiki.drewhess.com/wiki/SICP_exercise_2.49 to be able to draw wave
+def connect(vect_list):
+    def iter(segment_list, remaining):
+        if cdr(remaining) is nil():
+            return reverse(segment_list)
+        return iter(cons(make_segment(car(remaining), cadr(remaining)), segment_list), cdr(remaining))
+
+    return iter(nil(), vect_list)
+
+
+def wave(frame):
     """The primitive painter (implementation as part of exercice 2.49)"""
-    with let(None) as (frame,):
-        return segments__painter(lisp_list())(frame)
+    return segments__painter(append(
+        connect(
+            lisp_list(
+                make_vect(0.4, 0.0),
+                make_vect(0.5, 0.33),
+                make_vect(0.6, 0.0)
+            )
+        ), append(
+            connect(
+                lisp_list(
+                    make_vect(0.25, 0.0),
+                    make_vect(0.33, 0.5),
+                    make_vect(0.3, 0.6),
+                    make_vect(0.1, 0.4),
+                    make_vect(0.0, 0.6),
+                )
+            ), append(
+                connect(
+                    lisp_list(
+                        make_vect(0.0, 0.8),
+                        make_vect(0.1, 0.6),
+                        make_vect(0.33, 0.65),
+                        make_vect(0.4, 0.65),
+                        make_vect(0.35, 0.8),
+                        make_vect(0.4, 1.0),
+                    )
+                ), append(
+                    connect(
+                        lisp_list(
+                            make_vect(0.75, 0.0),
+                            make_vect(0.6, 0.45),
+                            make_vect(1.0, 0.15),
+                        )
+                    ),
+                    connect(
+                        lisp_list(
+                            make_vect(1.0, 0.35),
+                            make_vect(0.8, 0.65),
+                            make_vect(0.6, 0.65),
+                            make_vect(0.65, 0.8),
+                            make_vect(0.6, 1.0),
+                        )
+                    ),
+                )))))(frame)
 
 
 def identity():
@@ -41,8 +94,19 @@ def flip_vert(painter):
     )
 
 
+def below2(painter1, painter2):
+    with let(make_vect(0.0, 0.5)) as (split_point,):
+        with let(
+                transform_painter(painter1, make_vect(0.0, 0.0), make_vect(1.0, 0.0), split_point),
+                transform_painter(painter2, split_point, make_vect(1.0, 0.5), make_vect(0.0, 1.0)),
+        ) as (paint_top, paint_bottom):
+            return lambda frame: (paint_top(frame), paint_bottom(frame))
+
+
 def below(painter1, painter2):
-    pass
+    return rotate270(
+            beside(rotate90(painter1), rotate90(painter2))
+    )
 
 
 def flipped_pairs(painter):
@@ -79,11 +143,24 @@ def square_limit(painter, n):
 
 
 def flip_horiz(painter):
-    pass
+    return transform_painter(
+        painter,
+        make_vect(1.0, 0.0),
+        make_vect(0.0, 0.0),
+        make_vect(1.0, 1.0),
+    )
 
 
 def rotate180(painter):
-    pass
+    return flip_horiz(
+        flip_vert(painter)
+    )
+
+
+def rotate270(painter):
+    return rotate180(
+        rotate90(painter)
+    )
 
 
 def up_split(painter, n):
@@ -222,18 +299,23 @@ def segments__painter(segment_list):
 
 def draw_line(point1, point2):
     """Draws a line on the screen between two specified points"""
-    point1 = (100 * coor for coor in point1)
-    point2 = (100 * coor for coor in point2)
+    SCALE = 400
+    point1 = (SCALE * point1[0], SCALE * point1[1])
+    point2 = (SCALE * point2[0], SCALE * point2[1])
     try:
         drawer = board.turtles()[-1]
     except IndexError:
         drawer = turtle.RawTurtle(board)
-        drawer.hideturtle()
+        drawer.setposition((0, 0))
+        drawer.shape('circle')
+        # drawer.hideturtle()
+    # initial_position = drawer.pos()
     drawer.penup()
     drawer.goto(point1)
     drawer.pendown()
     drawer.goto(point2)
-
+    # drawer.penup()
+    # drawer.goto(initial_position)
 
 
 # Exercise 2.48
@@ -253,6 +335,7 @@ def end_segment(segment):
 # Exercise 2.49
 
 def outline(frame):
+    """
     with let(origin_frame(frame), edge1_frame(frame), edge2_frame(frame)) as (origin, edge1, edge2):
         with let(add_vect(edge1, edge2)) as (up_corner,):
             return segments__painter(
@@ -263,9 +346,25 @@ def outline(frame):
                     make_segment(edge1, origin),
                 )
             )(frame)
+    """
+    with let(
+            make_vect(0.0, 0.0),
+            make_vect(1.0, 0.0),
+            make_vect(0.0, 1.0),
+            make_vect(1.0, 1.0)
+    ) as (origin, edge1, edge2, up_corner):
+        return segments__painter(
+            lisp_list(
+                make_segment(origin, edge2),
+                make_segment(edge2, up_corner),
+                make_segment(up_corner, edge1),
+                make_segment(edge1, origin),
+            )
+        )(frame)
 
 
 def X(frame):
+    """
     with let(origin_frame(frame), edge1_frame(frame), edge2_frame(frame)) as (origin, edge1, edge2):
         with let(add_vect(edge1, edge2)) as (up_corner,):
             return segments__painter(
@@ -274,9 +373,23 @@ def X(frame):
                     make_segment(origin, up_corner)
                 )
             )(frame)
+    """
+    with let(
+            make_vect(0.0, 0.0),
+            make_vect(1.0, 0.0),
+            make_vect(0.0, 1.0),
+            make_vect(1.0, 1.0)
+    ) as (origin, edge1, edge2, up_corner):
+        return segments__painter(
+            lisp_list(
+                make_segment(edge1, edge2),
+                make_segment(origin, up_corner)
+            )
+        )(frame)
 
 
 def diamond(frame):
+    """
     with let(origin_frame(frame), edge1_frame(frame), edge2_frame(frame)) as (origin, edge1, edge2):
         return segments__painter(
             lisp_list(
@@ -286,6 +399,21 @@ def diamond(frame):
                 make_segment(scale_vect(0.5, edge1), scale_vect(0.5, edge2))
             )
         )(frame)
+    """
+    with let(
+            make_vect(0.0, 0.0),
+            make_vect(1.0, 0.0),
+            make_vect(0.0, 1.0),
+    ) as (origin, edge1, edge2):
+        return segments__painter(
+            lisp_list(
+                make_segment(scale_vect(0.5, edge2), add_vect(edge2, scale_vect(0.5, edge1))),
+                make_segment(add_vect(edge2, scale_vect(0.5, edge1)), add_vect(edge1, scale_vect(0.5, edge2))),
+                make_segment(add_vect(edge1, scale_vect(0.5, edge2)), scale_vect(0.5, edge1)),
+                make_segment(scale_vect(0.5, edge1), scale_vect(0.5, edge2))
+            )
+        )(frame)
+
 
 # EOE
 
@@ -301,6 +429,7 @@ def transform_painter(painter, origin, corner1, corner2):
                         sub_vect(m(corner2), new_origin)
                     )
                 )
+
     return anonfunc
 
 
@@ -336,12 +465,66 @@ def run_the_magic():
         assert frame_coord_map(a_frame)(make_vect(0, 0)) == origin_frame(a_frame)
     f = make_frame(
         cons(0, 0),
-        make_vect(0, 1),
-        make_vect(1, 0)
+        make_vect(1, 0),
+        make_vect(0, 1)
     )
     outline(f)
-    diamond(f)
-    X(f)
+    # diamond(f)
+    # X(f)
+    # squash_inwards(outline)(f)
+    # rotate90(squash_inwards(outline))(f)
+    # rotate180(squash_inwards(outline))(f)
+    # flip_horiz(squash_inwards(outline))(f)
+    # rotate90(diamond)(f)
+    # flip_horiz(squash_inwards(
+    #     beside(
+    #         flip_vert(wave),
+    #         wave
+    #     )
+    # ))(f)
+    # beside(
+    #     flip_vert(wave),
+    #     wave
+    # )(f)
+    # rotate90(
+    #     beside(
+    #         flip_vert(wave),
+    #         wave
+    #     )
+    # )(f)
+    # below2(
+    #     rotate180(rotate90(
+    #         beside(
+    #             flip_vert(wave),
+    #             wave
+    #         )
+    #     )),
+    #     rotate270(
+    #         beside(
+    #             flip_vert(wave),
+    #             wave
+    #         )
+    #     )
+    # )(f)
+    # beside(diamond, squash_inwards(outline))(f)
+    # below(diamond, squash_inwards(outline))(f)
+    # below2(diamond, squash_inwards(outline))(f)
+    # below(wave, flip_vert(wave))(f)
+    # wave(f)
+    # below2(wave, flip_vert(wave))(f)
+    # beside(
+    #     # flip_vert(rotate90(shrink_to_upper_right(diamond))),
+    #     diamond,
+    #     diamond
+    # )(f)
+    # beside(
+    #     wave,
+    #     flip_vert(wave)
+    # )(f)
+    # flip_vert(outline)(f)
+    # wave4()(f)
+    # right_split(wave, 4)(f)
+    corner_split(wave, 4)(f)
     board.mainloop()
 
 

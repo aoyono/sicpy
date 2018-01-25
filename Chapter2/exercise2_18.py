@@ -2,12 +2,12 @@
 """
 https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-15.html#%_thm_2.18
 """
-from Chapter2.lisp_list_structured_data import car, cdr, cons, lisp_list, print_lisp_list
+from Chapter2.lisp_list_structured_data import car, cdr, cons, lisp_list, print_lisp_list, nil
 
 
 def reverse(l):
     def iterate(items, acc):
-        if items is None:
+        if items is nil():
             return acc
         return iterate(cdr(items), cons(car(items), acc))
 
