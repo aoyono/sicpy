@@ -11,7 +11,7 @@ from utils import let
 board = turtle.Screen()
 board.setup(width=500, height=500, startx=0, starty=0)
 board.title('The picture language - SICP')
-board.setworldcoordinates(0, 500, 500, 0)
+board.setworldcoordinates(0.0, 0.0, 25, 25)
 
 
 # Taken from http://wiki.drewhess.com/wiki/SICP_exercise_2.49 to be able to draw wave
@@ -99,7 +99,7 @@ def below2(painter1, painter2):
         with let(
                 transform_painter(painter1, make_vect(0.0, 0.0), make_vect(1.0, 0.0), split_point),
                 transform_painter(painter2, split_point, make_vect(1.0, 0.5), make_vect(0.0, 1.0)),
-        ) as (paint_top, paint_bottom):
+        ) as (paint_bottom, paint_top):
             return lambda frame: (paint_top(frame), paint_bottom(frame))
 
 
@@ -158,8 +158,11 @@ def rotate180(painter):
 
 
 def rotate270(painter):
-    return rotate180(
-        rotate90(painter)
+    return transform_painter(
+        painter,
+        make_vect(0.0, 1.0),
+        make_vect(0.0, 0.0),
+        make_vect(1.0, 1.0),
     )
 
 
@@ -299,23 +302,18 @@ def segments__painter(segment_list):
 
 def draw_line(point1, point2):
     """Draws a line on the screen between two specified points"""
-    SCALE = 400
-    point1 = (SCALE * point1[0], SCALE * point1[1])
-    point2 = (SCALE * point2[0], SCALE * point2[1])
+    point1 = (board.xscale * point1[0], board.yscale * point1[1])
+    point2 = (board.xscale * point2[0], board.yscale * point2[1])
     try:
         drawer = board.turtles()[-1]
     except IndexError:
         drawer = turtle.RawTurtle(board)
         drawer.setposition((0, 0))
         drawer.shape('circle')
-        # drawer.hideturtle()
-    # initial_position = drawer.pos()
     drawer.penup()
     drawer.goto(point1)
     drawer.pendown()
     drawer.goto(point2)
-    # drawer.penup()
-    # drawer.goto(initial_position)
 
 
 # Exercise 2.48
@@ -417,6 +415,13 @@ def diamond(frame):
 
 # EOE
 
+def edges(frame):
+    with let(make_vect(0.0, 0.0), make_vect(1.0, 0.0), make_vect(0.0, 1.0)) as (origin, edge1, edge2):
+        return segments__painter(lisp_list(
+            make_segment(origin, edge1),
+            make_segment(origin, edge2)
+        ))(frame)
+
 
 def transform_painter(painter, origin, corner1, corner2):
     def anonfunc(frame):
@@ -464,67 +469,17 @@ def run_the_magic():
     with let(make_frame(make_vect(0, 0), make_vect(0, 1), make_vect(1, 0))) as (a_frame,):
         assert frame_coord_map(a_frame)(make_vect(0, 0)) == origin_frame(a_frame)
     f = make_frame(
-        cons(0, 0),
-        make_vect(1, 0),
-        make_vect(0, 1)
+        cons(0.0, 0.0),
+        make_vect(1.0, 0.0),
+        make_vect(0.0, 1.0)
     )
-    outline(f)
-    # diamond(f)
-    # X(f)
-    # squash_inwards(outline)(f)
-    # rotate90(squash_inwards(outline))(f)
-    # rotate180(squash_inwards(outline))(f)
-    # flip_horiz(squash_inwards(outline))(f)
-    # rotate90(diamond)(f)
-    # flip_horiz(squash_inwards(
-    #     beside(
-    #         flip_vert(wave),
-    #         wave
-    #     )
-    # ))(f)
-    # beside(
-    #     flip_vert(wave),
-    #     wave
-    # )(f)
-    # rotate90(
-    #     beside(
-    #         flip_vert(wave),
-    #         wave
-    #     )
-    # )(f)
-    # below2(
-    #     rotate180(rotate90(
-    #         beside(
-    #             flip_vert(wave),
-    #             wave
-    #         )
-    #     )),
-    #     rotate270(
-    #         beside(
-    #             flip_vert(wave),
-    #             wave
-    #         )
-    #     )
-    # )(f)
-    # beside(diamond, squash_inwards(outline))(f)
-    # below(diamond, squash_inwards(outline))(f)
-    # below2(diamond, squash_inwards(outline))(f)
+    edges(f)
+    below(diamond, wave)(f)
+    below2(diamond, wave)(f)
+    # beside(diamond, wave)(f)
     # below(wave, flip_vert(wave))(f)
     # wave(f)
     # below2(wave, flip_vert(wave))(f)
-    # beside(
-    #     # flip_vert(rotate90(shrink_to_upper_right(diamond))),
-    #     diamond,
-    #     diamond
-    # )(f)
-    # beside(
-    #     wave,
-    #     flip_vert(wave)
-    # )(f)
-    # flip_vert(outline)(f)
-    # wave4()(f)
-    # right_split(wave, 4)(f)
-    corner_split(wave, 4)(f)
     board.mainloop()
 
 
