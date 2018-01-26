@@ -97,8 +97,8 @@ def flip_vert(painter):
 def below2(painter1, painter2):
     with let(make_vect(0.0, 0.5)) as (split_point,):
         with let(
-                transform_painter(painter1, make_vect(0.0, 0.0), make_vect(1.0, 0.0), split_point),
-                transform_painter(painter2, split_point, make_vect(1.0, 0.5), make_vect(0.0, 1.0)),
+                transform_painter(painter2, make_vect(0.0, 0.0), make_vect(1.0, 0.0), split_point),
+                transform_painter(painter1, split_point, make_vect(1.0, 0.5), make_vect(0.0, 1.0)),
         ) as (paint_bottom, paint_top):
             return lambda frame: (paint_top(frame), paint_bottom(frame))
 
