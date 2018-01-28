@@ -1,3 +1,4 @@
 cachetools
 matplotlib
 click
+sympy
