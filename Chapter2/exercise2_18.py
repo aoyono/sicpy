@@ -7,7 +7,7 @@ from Chapter2.lisp_list_structured_data import car, cdr, cons, lisp_list, print_
 
 def reverse(l):
     def iterate(items, acc):
-        if items is nil():
+        if items is nil:
             return acc
         return iterate(cdr(items), cons(car(items), acc))
 

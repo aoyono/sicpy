@@ -33,7 +33,7 @@ def seq(symbol1, symbol2):
 
 
 def memq(item, x):
-    if x is nil():
+    if x is nil:
         return False
     elif seq(item, car(x)):
         return x

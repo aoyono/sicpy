@@ -12,7 +12,7 @@ from utils import let
 
 
 def sum_odd_squares(tree):
-    if tree is nil():
+    if tree is nil:
         return 0
     if not pair(tree):
         if odd(tree):
@@ -46,7 +46,7 @@ def even_fibs(n):
 
 
 def filter(predicate, sequence):
-    if sequence is nil():
+    if sequence is nil:
         return lisp_list()
     if predicate(car(sequence)):
         return cons(
@@ -63,7 +63,7 @@ def filter(predicate, sequence):
 
 
 def accumulate(op, initial, sequence):
-    if sequence is nil():
+    if sequence is nil:
         return initial
     return op(
         car(sequence),
@@ -88,7 +88,7 @@ def enumerate_interval(low, high):
 
 
 def enumerate_tree(tree):
-    if tree is nil():
+    if tree is nil:
         return lisp_list()
     if not pair(tree):
         return lisp_list(tree)

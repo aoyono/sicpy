@@ -11,7 +11,7 @@ def square_list(items):
     final result list in opposite ways: while answer list grows, things list shrinks"""
 
     def iter(things, answer):
-        if things is nil():
+        if things is nil:
             return answer
         return iter(
             cdr(things),
@@ -21,12 +21,12 @@ def square_list(items):
             )
         )
 
-    return iter(items, nil())
+    return iter(items, nil)
 
 
 def square_list2(items):
     def iter(things, answer):
-        if things is nil():
+        if things is nil:
             return answer
         return iter(
             cdr(things),
@@ -36,7 +36,7 @@ def square_list2(items):
             )
         )
 
-    return iter(items, nil())
+    return iter(items, nil)
 
 
 def run_the_magic():

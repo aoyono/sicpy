@@ -10,7 +10,7 @@ from Chapter2.symbolic_data import quote, seq
 def list_equal(l1, l2):
     """list_equal naively thinks that if l1 and l2 are not lists, they will be symbols"""
     if pair(l1) and pair(l2):
-        if l1 is nil() and l2 is nil():
+        if l1 is nil and l2 is nil:
             return True
         return list_equal(car(l1), car(l2)) and list_equal(cdr(l1), cdr(l2))
     return seq(l1, l2)

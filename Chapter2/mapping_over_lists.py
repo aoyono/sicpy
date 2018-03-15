@@ -5,7 +5,7 @@ from Chapter2.lisp_list_structured_data import car, cdr, cons, lisp_list, nil, p
 
 
 def scale_list(items, factor):
-    if items is nil():
+    if items is nil:
         return lisp_list()
     return cons(
         car(items) * factor,
@@ -14,7 +14,7 @@ def scale_list(items, factor):
 
 
 def map(proc, items):
-    if items is nil():
+    if items is nil:
         return lisp_list()
     return cons(
         proc(car(items)),

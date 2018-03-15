@@ -12,7 +12,7 @@ def fold_left(op, initial, sequence):
     """Equivalent to accumulate (also known as fold_right)"""
 
     def iterate(result, rest):
-        if rest is nil():
+        if rest is nil:
             return result
         return iterate(
             op(result, car(rest)),
@@ -28,9 +28,9 @@ def run_the_magic():
     print('(fold-left / 1 (list 1 2 3))')
     print(fold_left(truediv, 1, lisp_list(1, 2, 3)))
     print('(fold-right list nil (list 1 2 3))')
-    print_lisp_list(fold_right(lisp_list, nil(), lisp_list(1, 2, 3)))
+    print_lisp_list(fold_right(lisp_list, nil, lisp_list(1, 2, 3)))
     print('(fold-left list nil (list 1 2 3))')
-    print_lisp_list(fold_left(lisp_list, nil(), lisp_list(1, 2, 3)))
+    print_lisp_list(fold_left(lisp_list, nil, lisp_list(1, 2, 3)))
     print('To guarantee that fold-left and fold-right give the same result for any sequence, operator should be '
           'commutative (or independant of the order of the parameters) : (op a b) = (op b a). Examples:')
     print('(fold-right + 0 (list 1 2 3)')

@@ -11,7 +11,7 @@ from utils import let
 
 
 def accumulate_n(op, init, seqs):
-    if car(seqs) is nil():
+    if car(seqs) is nil:
         return lisp_list()
     return cons(
         accumulate(op, init, map(car, seqs)),

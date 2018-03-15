@@ -30,7 +30,7 @@ def queens(board_size):
 
 
 def empty_board():
-    return nil()
+    return nil
 
 
 def is_safe(col, positions):

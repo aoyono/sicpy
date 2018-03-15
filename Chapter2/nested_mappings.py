@@ -10,7 +10,7 @@ from Chapter2.sequences_as_conventional_interfaces import accumulate, enumerate_
 
 
 def flatmap(proc, seq):
-    return accumulate(append, nil(), map(proc, seq))
+    return accumulate(append, nil, map(proc, seq))
 
 
 def sum_is_prime(pair):
@@ -49,8 +49,8 @@ def permutations(s):
     Note: In Python (which may not be optimised for tail-recursion), this function works up to a set of 6 elements. From
     7 elements, it raises a RecursionError
     """
-    if s is nil():  # If the set is empty
-        return lisp_list(nil())  # Return the sequence containing empty set
+    if s is nil:  # If the set is empty
+        return lisp_list(nil)  # Return the sequence containing empty set
     return flatmap(
         lambda x: map(
             lambda p: cons(x, p),

@@ -8,7 +8,7 @@ from Chapter2.mapping_over_lists import map
 
 
 def square_list(items):
-    if items is nil():
+    if items is nil:
         return lisp_list()
     return cons(
         square(car(items)),

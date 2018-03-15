@@ -7,8 +7,8 @@ from utils import let
 
 
 def for_each(func, items):
-    if items is nil():
-        return nil()
+    if items is nil:
+        return nil
     with let(func(car(items))):
         for_each(func, cdr(items))
 

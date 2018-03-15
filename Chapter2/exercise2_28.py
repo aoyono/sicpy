@@ -9,7 +9,7 @@ from utils import let
 
 def fringe(x):
     def iterate(items, acc):
-        if items is nil():
+        if items is nil:
             return acc
         with let(car(items), cdr(items)) as (head, tail):
             if pair(head):

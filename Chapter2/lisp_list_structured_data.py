@@ -13,7 +13,7 @@ from operator import add
 
 from Chapter1.exercise1_9 import inc
 
-nil = tuple
+nil = tuple()
 
 
 def cons(a, b):
@@ -37,7 +37,7 @@ def cdr(pair):
 # In addition to these, we also give an implementation of Lisp list structure
 def lisp_list(*args):
     if not args:
-        return nil()
+        return nil
     return cons(args[0], lisp_list(*args[1:]))
 
 
@@ -66,7 +66,7 @@ def cddr(pair):
 
 
 def length(items):
-    if items is nil():
+    if items is nil:
         return 0
     return 1 + length(cdr(items))
 
@@ -75,7 +75,7 @@ def rlength(items):
     """Recursive implementation of length"""
 
     def rlength_iter(a, count):
-        if a is nil():
+        if a is nil:
             return count
         return rlength_iter(cdr(a), inc(count))
 
@@ -83,7 +83,7 @@ def rlength(items):
 
 
 def append(list1, list2):
-    if list1 is nil():
+    if list1 is nil:
         return list2
     return cons(
         car(list1),
@@ -98,7 +98,7 @@ def repr_lisp_list(l):
         """We can't import reverse from exercise2_18 as itself imports from this module"""
 
         def iterate(items, acc):
-            if items is nil():
+            if items is nil:
                 return acc
             return iterate(cdr(items), cons(car(items), acc))
 
@@ -106,7 +106,7 @@ def repr_lisp_list(l):
 
     def accumulate(op, initial, sequence):
         """We can't import accumulate from sequences_as_conventional_interfaces as itself imports from this module"""
-        if sequence is nil():
+        if sequence is nil:
             return initial
         return op(
             car(sequence),

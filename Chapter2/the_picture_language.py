@@ -17,11 +17,11 @@ board.setworldcoordinates(0.0, 0.0, 25, 25)
 # Taken from http://wiki.drewhess.com/wiki/SICP_exercise_2.49 to be able to draw wave
 def connect(vect_list):
     def iter(segment_list, remaining):
-        if cdr(remaining) is nil():
+        if cdr(remaining) is nil:
             return reverse(segment_list)
         return iter(cons(make_segment(car(remaining), cadr(remaining)), segment_list), cdr(remaining))
 
-    return iter(nil(), vect_list)
+    return iter(nil, vect_list)
 
 
 def wave(frame):

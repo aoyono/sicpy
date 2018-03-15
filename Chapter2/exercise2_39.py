@@ -10,7 +10,7 @@ from Chapter2.sequences_as_conventional_interfaces import accumulate as fold_rig
 def reverse1(sequence):
     return fold_right(
         lambda x, y: lisp_list(y, x),
-        nil(),
+        nil,
         sequence
     )
 
@@ -18,7 +18,7 @@ def reverse1(sequence):
 def reverse2(sequence):
     return fold_left(
         lambda x, y: lisp_list(y, x),
-        nil(),
+        nil,
         sequence
     )
 
