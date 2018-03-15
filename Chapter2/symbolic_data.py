@@ -10,7 +10,17 @@ from Chapter2.mapping_over_lists import map
 def quote(symbols):
     """Python does not support symbolic data by design so we use sympy to emulate the behaviour"""
     if isinstance(symbols, str):
-        return sympy.var(symbols)
+        try:
+            int(symbols)
+        except ValueError:
+            try:
+                float(symbols)
+            except ValueError:
+                return sympy.var(symbols)
+            else:
+                return sympy.RealNumber(symbols)
+        else:
+            return sympy.Integer(symbols)
     return map(quote, symbols)
 
 
