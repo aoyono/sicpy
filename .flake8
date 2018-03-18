@@ -1,0 +1,4 @@
+[flake8]
+exclude=*.pyc,.git,__pycache__
+max-line-length=99
+statistics=True

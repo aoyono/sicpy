@@ -105,3 +105,5 @@ ENV/
 
 # everything else
 Chapter*/.*
+
+.dir-locals.el
