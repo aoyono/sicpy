@@ -61,7 +61,7 @@ def magic_work(filename):
         module_name = os.path.basename(filename).split('.')[0]
         for chapter in get_chapters(filename=filename):
             try:
-                module = import_module('.'.join((chapter, module_name)))
+                module = import_module('.'.join((chapter.replace('/', '.'), module_name)))
             except ImportError:
                 continue
             else:
@@ -89,11 +89,16 @@ def run_the_magic(filename):
 def run_in_threads(target):
     thread_list = [
         threading.Thread(
-            target=target, args=(os.path.join(chapter, module_name),), name='.'.join((chapter, module_name))
+            target=target,
+            args=(os.path.join(chapter, module_name),),
+            name='.'.join((chapter.replace('/', '.'), module_name.replace('.py', '')))
         )
         for chapter in get_chapters()
         for module_name in filter(
-            lambda x: all((not os.path.isdir(x), not x.endswith('.pyc'), not os.path.basename(x).startswith('.'))),
+            lambda x: all((
+                not os.path.isdir(x), not x.endswith('.pyc'), not os.path.basename(x).startswith('.'),
+                '__init__' not in x
+            )),
             os.listdir(chapter)
         )
     ]

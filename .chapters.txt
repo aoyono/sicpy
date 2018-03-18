@@ -1,2 +1,4 @@
-Chapter1
-Chapter2
+Chapter1/exercises
+Chapter1/themes
+Chapter2/exercises
+Chapter2/themes
