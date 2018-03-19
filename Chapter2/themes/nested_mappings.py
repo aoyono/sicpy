@@ -6,7 +6,7 @@ from operator import add
 from Chapter1.themes.tfp_searching_for_divisors import is_prime
 from Chapter2.themes.lisp_list_structured_data import append, cadr, car, cons, lisp_list, nil, print_lisp_list
 from Chapter2.themes.mapping_over_lists import map
-from Chapter2.sequences_as_conventional_interfaces import accumulate, enumerate_interval, filter
+from Chapter2.themes.sequences_as_conventional_interfaces import accumulate, enumerate_interval, filter
 
 
 def flatmap(proc, seq):

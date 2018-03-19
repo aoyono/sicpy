@@ -4,7 +4,7 @@
 from operator import add, mul
 
 from Chapter1.themes.compound_procedures import square
-from Chapter1.exercise1_19 import fib
+from Chapter1.exercises.exercise1_19 import fib
 from Chapter2.themes.hierarchical_structures import pair
 from Chapter2.themes.lisp_list_structured_data import append, car, cdr, cons, lisp_list, nil, print_lisp_list
 from Chapter2.themes.mapping_over_lists import map

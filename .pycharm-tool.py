@@ -15,7 +15,8 @@ def next_exercise(chapter, previous, page):
     filename_to_create = 'exercise{chapter}_{number}.py'
     subfolder = os.path.join(
         os.path.abspath(os.path.dirname(__file__)),
-        'Chapter{}'.format(chapter)
+        'Chapter{}'.format(chapter),
+        'exercises'
     )
 
     if not os.path.isdir(subfolder):
@@ -154,7 +155,7 @@ def create_next_exercise_file(filename):
     if match:
         chapter = match.group('chap_nb')
         previous = int(match.group('exo_nb'))
-        with open('Chapter{}/{}'.format(chapter, current_exercise_filename), 'r') as fd:
+        with open('Chapter{}/exercises/{}'.format(chapter, current_exercise_filename), 'r') as fd:
             line = fd.readline()
             while line:
                 if line.startswith('http'):
