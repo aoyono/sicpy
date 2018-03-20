@@ -29,3 +29,4 @@ def intersection_set(set1, set2):
 
 # Enable importing some procedures defined in exercises as originating from the theme
 from Chapter2.exercises.exercise2_61 import adjoin_set
+from Chapter2.exercises.exercise2_62 import union_set
