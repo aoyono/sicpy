@@ -2,7 +2,6 @@
 """
 https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-16.html#%_thm_2.62
 """
-from Chapter2.exercises.exercise2_28 import fringe
 from Chapter2.exercises.exercise2_61 import adjoin_set
 from Chapter2.themes.lisp_list_structured_data import lisp_list, print_lisp_list
 from Chapter2.themes.sequences_as_conventional_interfaces import accumulate
