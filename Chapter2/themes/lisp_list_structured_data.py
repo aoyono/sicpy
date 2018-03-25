@@ -24,6 +24,7 @@ def _get_tuple_element(instance, position):
     """Helper method to ensure we don't have errors while getting items from a tuple"""
     if isinstance(instance, tuple) and position < len(instance):
         return instance[position]
+    return nil
 
 
 def car(pair):

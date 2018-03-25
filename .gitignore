@@ -107,3 +107,6 @@ ENV/
 Chapter*/.*
 
 .dir-locals.el
+
+*#
+*~
