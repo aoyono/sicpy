@@ -2,20 +2,15 @@
 """
 https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-16.html#%_thm_2.66
 """
-import random
-from itertools import repeat
 
 from Chapter2.exercises.exercise2_63 import tree_to_list_2
 from Chapter2.exercises.exercise2_64 import list_to_tree
-from Chapter2.themes.lisp_list_structured_data import car, lisp_list, nil, cdr
-from Chapter2.themes.sets_as_binary_trees import (
-    element_of_set, make_tree,
-    entry,
-    left_branch,
-    right_branch,
-)
+from Chapter2.themes.lisp_list_structured_data import car, cdr, nil
 from Chapter2.themes.mapping_over_trees import map
-from utils import repeatfunc, let
+from Chapter2.themes.sets_as_binary_trees import (
+    entry, left_branch, make_tree, right_branch,
+)
+from utils import let
 
 
 def lookup(given_key, set_of_records):
