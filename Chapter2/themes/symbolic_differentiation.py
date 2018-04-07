@@ -5,7 +5,7 @@ import sympy
 
 from Chapter2.themes.hierarchical_structures import pair
 from Chapter2.themes.lisp_list_structured_data import caddr, cadr, car, lisp_list, print_lisp_list
-from Chapter2.themes.symbolic_data import quote, seq
+from Chapter2.themes.symbolic_data import quote, symbol_equal
 from utils import error, let
 
 
@@ -18,11 +18,11 @@ def is_a_variable(e):
 
 
 def same_variable(v1, v2):
-    return is_a_variable(v1) and is_a_variable(v2) and seq(v1, v2)
+    return is_a_variable(v1) and is_a_variable(v2) and symbol_equal(v1, v2)
 
 
 def is_a_sum(e):
-    return pair(e) and seq(car(e), quote('+'))
+    return pair(e) and symbol_equal(car(e), quote('+'))
 
 
 def addend(e):
@@ -48,7 +48,7 @@ def make_sum(a1, a2):
 
 
 def is_a_product(e):
-    return pair(e) and seq(car(e), quote('*'))
+    return pair(e) and symbol_equal(car(e), quote('*'))
 
 
 def multiplier(e):
@@ -131,7 +131,7 @@ def deriv(exp, var):
 # Exercise 2.56
 
 def is_exponentiation(expr):
-    return pair(expr) and seq(car(expr), quote('**'))
+    return pair(expr) and symbol_equal(car(expr), quote('**'))
 
 
 def base(expr):

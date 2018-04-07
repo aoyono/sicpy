@@ -3,12 +3,13 @@
 """
 import sympy
 
-from Chapter2.themes.lisp_list_structured_data import nil, car, cdr, lisp_list
+from Chapter2.themes.lisp_list_structured_data import car, cdr, lisp_list, nil
 from Chapter2.themes.mapping_over_lists import map
 
 
 def quote(symbols):
-    """Python does not support symbolic data by design so we use sympy to emulate the behaviour"""
+    """Python does not support symbolic data by design so we use sympy to
+    emulate the behaviour"""
     if isinstance(symbols, str):
         try:
             int(symbols)
@@ -24,7 +25,7 @@ def quote(symbols):
     return map(quote, symbols)
 
 
-def seq(symbol1, symbol2):
+def symbol_equal(symbol1, symbol2):
     """Tests wether or not the two symbols are equal"""
     try:
         return symbol1.name == symbol2.name
@@ -35,7 +36,7 @@ def seq(symbol1, symbol2):
 def memq(item, x):
     if x is nil:
         return False
-    elif seq(item, car(x)):
+    elif symbol_equal(item, car(x)):
         return x
     else:
         return memq(item, cdr(x))

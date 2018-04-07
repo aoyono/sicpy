@@ -61,6 +61,11 @@ def caddr(pair):
     return cadr(cdr(pair))
 
 
+def cadddr(pair):
+    """alias for car(cdr(cdr(cdr(pair))))"""
+    return cadr(cddr(pair))
+
+
 def cddr(pair):
     """alias for cdr(cdr(pair))"""
     return cdr(cdr(pair))

@@ -12,3 +12,4 @@ def let(*args):
 
 def error(*args):
     print(*args)
+    raise Exception
