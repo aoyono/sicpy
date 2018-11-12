@@ -6,7 +6,6 @@ from Chapter2.themes.lisp_list_structured_data import (
     car, cdr, cadr,
     print_lisp_list,
 )
-from Chapter2.themes.representations_of_complex_numbers import attach_tag
 from Chapter2.themes.symbolic_data import quote
 from Chapter2.themes.symbolic_differentiation import (
     is_a_number, is_a_variable,

@@ -38,7 +38,7 @@ def install_rectangular_package():
 
     # Interface to the rest of the system
     def tag(x):
-        return attach_tag('rectangular', x)
+        return attach_tag(quote('rectangular'), x)
 
     put(quote('real-part'), quote(lisp_list('rectangular')), real_part)
     put(quote('imag-part'), quote(lisp_list('rectangular')), imag_part)
@@ -75,7 +75,7 @@ def install_polar_package():
 
     # Interface to the rest of the system
     def tag(x):
-        return attach_tag('polar', x)
+        return attach_tag(quote('polar'), x)
 
     put(quote('real-part'), quote(lisp_list('polar')), real_part)
     put(quote('imag-part'), quote(lisp_list('polar')), imag_part)

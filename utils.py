@@ -34,4 +34,26 @@ def get(operation, type_tag):
 
 
 def apply(proc, args):
-    return proc(*args)
+    return proc(*_lisp_list_to_python_list(args))
+
+
+def _lisp_list_to_python_list(l):
+    def _get_tuple_element(instance, position):
+        """Helper method to ensure we don't have errors while getting items
+        from a tuple"""
+        if isinstance(instance, tuple) and position < len(instance):
+            return instance[position]
+        return tuple()
+
+    def cdr(pair):
+        return _get_tuple_element(pair, 1)
+
+    def car(pair):
+        return _get_tuple_element(pair, 0)
+
+    elt = l
+    result = []
+    while elt:
+        result.append(car(elt))
+        elt = cdr(l)
+    return result
