@@ -1,0 +1,826 @@
+La programmation  est une  activité de  tous les  jours, qui
+existe  constamment  dans  une  société.   Il  s'agit  d'une
+activité  intellectuelle. La  programmation des  ordinateurs
+permet  de  saisir  cette  réalité.   Pour  maîtriser  cette
+activité,  il faut  lire  et écrire  beaucoup de  programmes
+informatiques, peu importe leur domaine d'application.
+
+"Le programmeur doit chercher à  la fois la perfection de la
+partie et l'adéquation de la collection". Alan Perlis, SICP
+
+La  programmation  des  ordinateurs  implique  3  foyers  de
+phénomènes: l'esprit  humain, les collections  de programmes
+d'ordinateur et l'ordinateur.  Chaque programme d'ordinateur
+est  un modèle,  flou dans  l'esprit humain,  d'un processus
+réel ou mental.  Ces processus,  issus de l'expérience et de
+la pensée humaines, sont riches en nombre, intriqués par les
+détails, et à tout  moment, seulement partiellement compris.
+Malgré  que nos  programmes soient  minutieusement élaborés,
+ils évoluent continuellement, et nous les changeons à mesure
+que notre  perception du modèle s'approfondis,  s'élargis et
+se généralise  jusqu'à ce que  le modèle atteigne  une place
+métastable à l'intérieur d'un  autre modèle avec lequel nous
+nous débattons.   Ce processus est une  source de découverte
+perpétuelle de mécanismes, exprimés  en tant que programmes,
+et génère une explosion de perception.
+
+"Si  l'art interprète  nos rêves,  l'ordinateur les  exécute
+sous l'apparence de programmes!" Alan J. Perlis, SICP
+
+L'ordinateur est  un chef  chantier très  exigeant à  qui on
+doit  dire  exactement  ce  qu'on veut  faire,  et  en  être
+sûr. Etant  donné que  les programmes  les plus  larges sont
+composés  de plusieurs  autres  programmes  plus petits,  la
+bonne façon de s'assurer de  leur justesse est de consolider
+notre  assurance  dans  la   justesse  de  ces  plus  petits
+programmes. Il faut donc se  forger un arsenal de structures
+de programmes  standard dont  la justesse  a été  établie de
+manière rigoureuse,  appelées *idiomes*, et apprendre  à les
+combiner  en   structures  plus  larges  en   utilisant  des
+techniques organisationnelles dont la  valeur a été prouvée.
+La  maîtrise  de  techniques  organisationnelles  puissantes
+accélère  notre habilité  à créer  des programmes  larges et
+significatifs.
+
+"Un programmeur  devrait acquerir de bons  algorithmes et de
+bons idiomes.   Même si certains programmes  résistent à des
+spécifications   précises,   c'est  la   responsabilité   du
+programmeur  d'estimer, et  de toujours  essayer d'améliorer
+leur performance." Alan J. Perlis, SICP
+
+L'objectif du  livre SICP est de  sensibiliser les étudiants
+aux   éléments   de  style   et   de   l'esthétique  de   la
+programmation. Ils doivent maîtriser les techniques majeures
+de contrôle de la complexité de larges systèmes. Ils doivent
+être capables de lire un programme  de 50 pages de long s'il
+est écris  dans un style  exemplaire. Ils doivent  savoir ce
+qu'il  ne faut  pas  lire et  ce dont  ils  ont besoin  pour
+comprendre  à  tout  moment.   Ils devraient  se  sentir  en
+sécurité pour modifier un  programme, en maintenant l'esprit
+et  le style  de  l'auteur original.   Ces compétences  sont
+communes  à  toutes  les  disciplines  de  l'ingénieurie  de
+conception.
+
+Le contrôle  de la  complexité se  fait en  construisant des
+abstractions  qui   cachent  les  détails  quand   cela  est
+approprié. Il  se fait  aussi en établissant  des interfaces
+conventionnelles qui  permettent de construire  des systèmes
+en combinant des  pièces standards et bien  comprises. Il se
+fait enfin  en établissant de noveaux  langages pour décrire
+un  design, chacun  desquels mets  l'accent sur  des aspects
+particuliers du design et considèrent moins d'autres.
+
+La  révolution des  ordinateurs est  une révolution  dans la
+manière dont nous pensons et dont nous exprimons ce que nous
+pensons. L'essence  de ce  changement est l'émergence  de ce
+qu'on pourrait appeler  *épistémologie procédurale* (l'étude
+de  la  structure  de  la connaissance  d'un  point  de  vue
+impératif, opposé à un point de vue plus déclaratif pris par
+les disciplines mathématiques classiques). Les mathématiques
+fournissent un cadre de travail pour traiter précisément les
+notions de  "qu'est-ce que". Le  calcul fournit un  cadre de
+travail  pour  traiter  précisément   avec  les  notions  de
+"comment faire".
+
+
+* Building abstractions with procedures
+
+"Les  actions de  l'esprit,  dans lesquelles  il exerce  son
+pouvoir à travers des idées simples, sont principalement les
+suivantes: 1.  Combiner plusieurs idées simples en une seule
+idée  composée,  et  ainsi  sont  faites  toutes  les  idées
+complexes. 2.   Mettre ensemble deux idées,  qu'elles soient
+simples ou complexes, et les  mettres l'une après l'autre de
+façon  à  en avoir  une  visualisation  immédiate, sans  les
+unifier en  une seule, action par  laquelle l'esprit obtient
+toutes ses idées des relations. 3. Les séparer de toutes les
+autres idées qui les  accompagne dans leur existence réelle:
+il  s'agit  de  l'abstraction,  et ainsi  toutes  les  idées
+générales de  l'esprit sont  faites." John Locke,  Essai Sur
+L'entendement Humain (1690).
+
+Un *processus  de calcul* est  un objet abstrait  qui réside
+dans un ordinateur et qui manipule d'autres objets abstraits
+appelés  *données*,  dont  l'évolution est  dirigée  par  un
+patron de règles appelé *programme*.
+
+Un   programme  est   composé  d'*expressions   symboliques*
+appartenant à  un *langage de programmation*,  qui décrivent
+les tâches à effectuer par les processus de calcul.
+
+Un  interpréteur  Python est  une  machine  qui exécute  les
+processus décrits dans le langage Python.
+
+** The elements of programming
+
+Un langage  de programmation puissant est  plus qu'un simple
+moyen  de demander  à  un  ordinateur d'effectuer  certaines
+tâches. Il  sert aussi  de cadre de  travail dans  lequel on
+organise nos  idées sur les  processus.  Quand on  décrit un
+langage, on  doit prêter attention aux  moyens qu'il fournit
+pour combiner des  idées simples pour former  des idées plus
+complexes.  Tout  langage  de  programmation  puissant  a  3
+mécanismes pour accomplir cet objectif:
+  
+  + les  *expressions   primitives*  qui  représentent  les
+   entités les plus simples du langage
+  + les  *moyens de  combinaison* par lesquels  les éléments
+    composés sont construits à partir des plus simples
+  +  les  *moyens d'abstraction*  par lesquels  les éléments
+     composés  peuvent être  nommés et  manipulés comme  des
+     unités
+
+*** Expressions
+
+Une  *combinaison*  est   une  expression  composée  faisant
+intervenir un *opérateur* et des *opérandes*, dont la valeur
+est  obtenue  en  appliquant   la  procédure  spécifiée  par
+l'opérateur  aux  *arguments*,  qui  sont  les  valeurs  des
+opérandes.
+
+Une boucle  Lecture-Evaluation-Affichage (REPL) est  un mode
+d'opération  d'un  interpréteur  qui  consiste  à  lire  une
+expression   d'un  terminal,   l'évaluer  et   afficher  son
+résultat.
+
+*** Naming and the Environment
+
+Il s'agit d'abstraire la valeur  d'un objet de calcul par un
+symbole  ou groupe  de symboles.  La valeur  de l'objet  est
+ainsi associée à un nom.
+
+Cette faculté d'associer une valeur à un nom et être capable
+de  retrouver cette  valeur à  travers ce  nom signifie  que
+l'interpréteur possède une *mémoire*, appelée *environnement
+global*
+
+*** Evaluating Combinations
+
+Pour évaluer des combinaisons, l'interpréteur suis également
+une procédure. Pour évaluer une combinaison:
+
+  + Evaluer les sous-expressions de la combinaison
+  +    Appliquer  la  procédure  qui est  la  valeur  de  la
+      sous-expression  la plus  à  gauche (l'opérateur)  aux
+      arguments   qui   sont    les   valeurs   des   autres
+      sous-expressions (les opérandes)
+
+La  règle d'évaluation  est *récursive*  de nature  (voir la
+1ère  étape).   Cette  première étape,  quand  appliquée  de
+manière  répétée  à   une  succession  de  sous-expressions,
+conduit   à   une   évaluation    terminale   non   pas   de
+sous-expressions, mais d'*expressions primitives* (chiffres,
+opérateurs  intégrés  ou  d'autres  noms)  dont  les  règles
+d'évaluation sont les suivantes:
+
+  + Les valeurs des chiffres sont les nombres qu'ils nomment
+  + Les valeurs des opérateurs intégrés sont les séquences
+    d'instructions  machine qui  exécutent les  opérations
+    correspondantes
+  + Les valeurs des autres noms sont les objets auxquels ils
+    sont associés dans l'environnement
+
+Les  exceptions à  la  règle générale  de l'évaluation  sont
+appelées *formes spéciales*.
+
+Les différents  types d'expressions  (chacune avec  sa règle
+d'évaluation associée)  constituent la *syntaxe*  du langage
+de programmation.
+
+*** Compound Procedures
+
+Les  *définitions   de  procédures*  constituent   un  moyen
+d'abstraction  plus  puissant  que  le  simple  nommage  des
+expressions. Il s'agit de de nommer des opérations composées
+auxquelles on  pourra faire  référence plus tard  comme s'il
+s'agissait d'une unité. Il devient alors difficile de savoir
+si une procédure utilisée dans  une expression est native du
+langage ou une expression composée de notre fait.
+
+*** The Substitution Model for Procedure Application
+
+En supposant  que le mécanisme d'application  des procédures
+primitives à des arguments  est intégré à l'interpréteur, on
+peut  modéliser le  processus  d'application des  procédures
+composées comme suit:
+
+  + Pour  appliquer une procédure composée  à des arguments,
+    évaluer le  corps de la procédure  avec chaque paramètre
+    formel remplacé par l'argument correspondant.
+
+Ce  processus  est  appelé  *modèle  de  substitution*  pour
+l'application  des procédures  et  peut être  pris comme  un
+modèle qui  détermine la signification de  l'application des
+procédures.
+
+**** Applicative order versus normal order
+
+*Applicative   order*    signifie:   évaluer    d'abord   le
+l'opérateur, ensuite  les opérandes,  et enfin  appliquer la
+procédure résultante aux arguments résultants.
+
+*Normal order* signifie: évaluer d'abord tous les opérateurs
+même  ceux  des  opérandes  jusqu'à ce  que  les  opérateurs
+restants ne  soient que  des opérateurs primitifs,  et enfin
+appliquer ces opérateurs primitifs aux arguments.
+
+Les  deux   sont  des   modes  d'évaluation  du   modèle  de
+substitution produisant les mêmes résultats, à la différence
+que  le 2ème  peut  conduire à  des  répétitions d'une  même
+expression.
+
+*** Note 20
+
+Les descriptions impératives et déclaratives sont intimement
+liées, tout  comme les mathématiques et  l'informatique. Par
+exemple, dire que  la réponse produite par  un programme est
+"correcte", c'est  faire une phrase déclarative  à propos du
+progamme. Il y a une  grand volume de recherche pour établir
+des  techniques   pour  prouver  que  des   programmes  sont
+corrects, et la plus grande difficulté technique de ce sujet
+a à  voir avec  la négociation de  la transition  entre des
+phrases impératives (à partir desquelles les programmes sont
+construits) et  les phrases  déclaratives (qui  peuvent être
+utilisées pour déduire des choses).  Dans la même veine, un
+sujet  important   dans  la   conception  des   langages  de
+programmation est l'exploration des  fameux langages de très
+haut niveau,  dans lesquels l'on programme  effectivement en
+termes  de phrases  déclaratives. L'idée  est de  rendre les
+interpréteurs  suffisamment  sophistiqués  pour  que,  étant
+donné  la connaissance  du "qu'est-ce-que"  spécifié par  le
+programmeur,  ils   puissent  générer  la   connaissance  du
+"comment faire"  automatiquement. Cela ne peut  être fait en
+général, mais il y a  des domaines importants où des progrès
+ont été faits.
+
+*** Procedures as Black-Box Abstractions
+
+L'utilisateur d'une procédure ne devrait pas avoir besoin de
+savoir  comment la  procédure est  implémentée pour  pouvoir
+l'utiliser.
+
+**** Local names
+
+Un des détails  qui ne doivent pas  importer à l'utilisateur
+d'une   procédure  c'est   le  choix   des  noms   fait  par
+l'implémenteur pour  les paramètres formels.   Cela signifie
+que les noms  des paramètres formels doivent  être locaux au
+corps de la procédure.
+
+Le  nom  d'un  paramètre  formel  de  procédure  est  appelé
+*variable liée* (*bound variable*). On dit que la définition
+de la  procédure *lie* (*binds*) ses  paramètres formels. Si
+une variable  n'est pas  liée, on  dit qu'elle  est *libre*.
+L'ensemble  des  expressions  pour  lesquelles  une  liaison
+définis un nom est appelé *portée* (*scope*) de ce nom. Dans
+la définition d'une procédure,  les variables liées définies
+comme paramètres formels de la  procédure ont pour portée le
+corps de la procédure.
+
+**** Internal definitions and block structure
+
+La définition  interne de  procédures auxiliaires  permet de
+rendre  les procédures  complexes indépendantes  et d'éviter
+d'éventuels conflits  de nom. La définition  d'une procédure
+qui  embarque  les  définitions  de  procédures  auxiliaires
+qu'elle  utilise possède  une *structure  de block*  (*block
+structure*), et est  la solution la plus  simple au problème
+d'empaquettage de  noms (*name-packaging*). La  structure de
+block  permet   aussi  de  réaliser  la   *portée  lexicale*
+(*lexical scoping*)  de variables, en rendant  les variables
+liées de  la procédure de  plus haut niveau libres  dans les
+procédures embarquées.
+
+***** Note 28
+
+Les définitions embarquées doivent aparaitre en permier dans
+le corps de la procédure.
+
+** Procedures and the Processes They Generate
+
+Pour  devenir un  expert  programmeur, on  doit apprendre  à
+visualiser  les processus  générés par  différents types  de
+procédures.
+
+Une procédure  est un patron pour  l'*évolution locale* d'un
+processus de  calcul. Elle spécifie comment  chaque étape du
+processus est construite par  dessus le processus précédent.
+Il  est   difficile  d'émettre   des  déclarations   sur  le
+comportement global d'un processus dont l'évolution locale a
+été spécifiée  par une  procédure en  général, mais  on peut
+décrire certains patrons typiques d'évolution de processus.
+
+*** Linear Recursion and Iteration
+
+Un  *processus  récursif*  est caractérisé  par  une  chaîne
+d'opérations différées.   Lorsque la  longueur de  la chaîne
+d'opérations différées et donc  la quantité d'informations à
+stocker  croît linéairement  avec  la taille  du problème  à
+résoudre,  tout  comme  le  nombre  d'étapes,  on  parle  de
+*processus linéairement récursif*.
+
+Un *processus  itératif* est caractérisé par  un nombre fini
+et fixe  de *variables  d'état*, une  règle fixe  qui décrit
+comment les variables  d'état devraient être mises  à jour à
+mesure  que   le  processus   évolue  d'état  en   état,  et
+éventuellement  un test  final qui  spécifie les  conditions
+dans lesquelles le processus devrait s'arrêter. Un processus
+itératif dont le nombre  d'étapes croît linéairement avec la
+taille  du  problème   est  appelé  *processus  linéairement
+itératif*.
+
+Il faut  faire attention  à ne  pas confondre  une procédure
+récursive et un processus  récursif. Une procédure récursive
+est  une   procédure  dont  la  définition   fait  référence
+(directement  ou  indirectement)  à  elle-même.   Une  telle
+procédure peut  générer un  processus qui évolue  de manière
+récursive  ou  itérative.
+
+La raison qui fait qu'on puisse  confondre les 2 est que les
+implémentations des langages courants,  sont faites de telle
+sorte  que l'interprétation  de  n'importe quelle  procédure
+récursive consomme une quantité de mémoire qui augmente avec
+le  nombre d'appels  à la  procédure, même  si le  processus
+généré est itératif  en principe. La conséquence  en est que
+ces  langages ne  peuvent  décrire  les processus  itératifs
+qu'en  terme  de formes  spéciales  pour  les opérations  de
+boucles.
+
+Une  implémentation  de  langage qui  exécute  un  processus
+itératif  en espace  mémoire constant  même si  le processus
+itératif  est   généré  par  une  procédure   récursive  est
+appelée *tail-recursive*. Avec   un  pareil  langage,  les
+itérations   peuvent  être   exprimées   en  utilisant   les
+mécanismes ordinaires  d'appel de  procédures, de  sorte que
+les  constructions d'itération  spéciales  ne soient  utiles
+qu'en tant que sucres syntaxiques.
+
+*** Tree Recursion
+
+Un *processus  récursif en arbre* est  un processus récursif
+dont la  procédure la  définissant est caractérisée  par une
+double  référence  à elle-même  à  chaque  fois qu'elle  est
+invoquée. L'évaluation de la  procédure se présente comme un
+arbre qui  se divise en 2  branches à chaque niveau  sauf au
+dernier.
+
+En  général, le  nombre d'étapes  requises par  un processus
+récursif  en arbre  sera proportionnel  au nombre  de noeuds
+dans   l'arbre,  tandis   que   la   mémoire  requise   sera
+proportionnelle à la profondeur maximale de l'arbre.
+
+Ce type  de processus est  très souvent inefficient  à cause
+par  exemple  de  redondances  de  calculs  (comme  dans  la
+variante  "normal   order"  du  processus   d'évaluation  de
+l'interpréteur),  mais généralement  facile à  spécifier car
+résultant  souvent  d'une  interprétation  directe  dans  le
+langage de programmation, de la  solution à un problème. Une
+approche de solution au problème de la redondance de calculs
+est de ranger  les valeurs déjà calculées dans  une table et
+de  regarder  dedans  avant  chaque  nouveau  calcul.  Cette
+stratégie est appelée *tabulation* ou *memoization*.
+
+*** Orders of Growth
+
+Les    ordres   de    grandeur    permettent   de    mesurer
+approximativement  la quantité  de ressources  R(n) requises
+par un processus pour un problème  de taille n.  La taille n
+du  problème  est  une caractéristique  propre  du  problème
+étudié  et les  ressources R(n)  peuvent être  le nombre  de
+registres   de  stockage   internes   utilisés,  le   nombre
+d'opérations machines élémentaires effectuées, etc.
+
+On  dit R(n)  a un  ordre de  grandeur theta(f(n)):  *R(n) =
+Theta(f(n))* s'il  existe des constantes positives  k1 et k2
+indépendantes de n telles que:  *k1.f(n) <= R(n) <= k2.f(n)*
+pour toute valeur de n suffisamment grande.
+
+** Formulating Abstraction with Higher-Order Procedures
+
+Les procédures  qui manipulent des procédures  sont appelées
+*procédures  d'ordre supérieur*  (*higher-order procedures*)
+et servent  à exprimer en  tant que concepts les  patrons de
+programmation  qui peuvent  être  utilisés  avec un  certain
+nombre de procédures différentes.
+
+La  possibilité  de passer  des  fonctions  en paramètres  à
+d'autres fonctions  constitue un indicateur important  de la
+puissance d'un  langage de programmation car  cela permet de
+construire  des procédures  génériques, s'appliquant  à tout
+type de  problèmes, du  moment que ces  problèmes présentent
+des caractéristiques similaires.
+
+Une  fonction  numérique  donnée   peut  être  calculée  par
+plusieurs procédures de calcul différents.
+
+*** Constructing procedures using lambda
+
+La forme  spéciale en  Lisp *lambda*  permet de  définir des
+procédures triviales dans un  contexte de procédures d'ordre
+supérieur, sans leur attribuer de nom.
+
+**** Using let to create local variables
+
+Pour inclure  des variables  locales dans une  procédure, on
+peut définir une procédure  interne pour lier ces variables,
+ou effectuer  un appel direct  à la procédure  interne ainsi
+définie  de manière  anonyme  à l'aide  de *lambda*.   Cette
+méthode  possède  une  forme  spéciale  appelée  *let*,  qui
+contient  une liste  de  noms de  variables  associées à  la
+valeur de l'expression qui les accompagne, suivie d'un corps
+dans lequel les variables précédentes sont liées en tant que
+variables locales.
+
+Let permet de lier les variables le plus localement possible
+à l'endroit où elles doivent être utilisées.
+
+Les  valeurs des  variables  liées localement  par let  sont
+calculées à  l'extérieur de l'expression let.   Cela devient
+important  quand l'expression  qui fournit  la valeur  d'une
+variable localement liée par  let utilise une variable ayant
+le même  nom qu'une variable  précédemment liée par  le même
+let. La  valeur utilisée pour la  variable dans l'expression
+n'est pas celle qui a précédemment été associée par let.
+
+*** Procedures as General Methods
+
+Les procédures  d'ordre supérieur permettent  d'utiliser les
+procédures pour  exprimer des méthodes générales  de calcul,
+indépendamment des fonctions particulières impliquées.
+
+*** Procedures as Returned Values
+
+**** Abstraction and first-class procedures
+
+Les programmeurs  experts savent  comment choisir  le niveau
+d'abstraction  approprié  pour  leur  tâche.   Mais  il  est
+important  d'être  capable  de   penser  en  termes  de  ces
+abstractions, de façon  à être prêt à les  appliquer dans de
+nouveaux  contextes.   L'importance des  procédures  d'ordre
+supérieur  est   qu'elles  permettent  de   représenter  ces
+abstractions  de  façon  explicite en  tant  qu'éléments  du
+langage de programmation de façon  à ce qu'ils puissent être
+considérés tout juste comme d'autres éléments de calcul.
+
+En  général,  les  langages de  programmation  imposent  des
+restrictions sur les façons dont les éléments de calcul sont
+manipulés. Les éléments ayant  le moins de restrictions sont
+réputés avoir  un *statut de première  classe* (*first-class
+status*). Ces éléments:
+
+  + Peuvent être nommés par des variables
+  + Peuvent être passés en argument à des procédures
+  + Peuvent  être  retournés   en  tant  que  résultats  de
+   procédures
+  + Peuvent être inclus dans des structures de données
+
+Un  exemple  d'élément de  première  classe  en Python:  les
+classes.
+
+Un  exemple  d'élément  de  première  classe  en  Lisp:  les
+procédures.
+
+La faculté de  renvoyer des procédures en  tant que résultat
+de l'application  d'une procédure à des  arguments nécessite
+de  réserver du  stockage  pour les  variables libres  d'une
+procédure,   même  quand   cette   procédure  ne   s'exécute
+pas.  C'est   le  coût  d'implémentation  majeur   de  cette
+décision.
+
+
+* Building abstractions with data
+
+** Introduction to data abstraction
+
+La  faculté  de  combiner  les  types  primitifs  permet  de
+raisonner  à un  niveau  d'abstraction plus  élevé qu'en  se
+limitant à la manipulation directe des types primitifs.
+
+De  facon  générale,  l'abstraction  rend  un  langage  plus
+expressif.  Par exemple, si  on considère le langage naturel
+écrit: il  est constitué  d'éléments primitifs que  sont les
+lettres.   Le  système  d'écriture  fournit  des  moyens  de
+combiner ces lettres pour former des mots, qui sont utilisés
+pour  raisonner sur  des  concepts  compréhensibles par  nos
+cerveaux.   Ces mots  sont ensuite  eux-mêmes utilisés  pour
+construire  des  phrases,  qui  nous  élèvent  à  un  niveau
+supérieur  d'abstraction  en  nous permettant  de  lier  les
+concepts entre eux.
+
+La faculté de combiner les données permet également d'isoler
+la façon dont les données sont représentées de la façon dont
+elles  sont  utilisées,  ce   qui  permet  une  plus  grande
+modularité.   C'est  cette  méthodologie  de  conception  de
+programmes qu'on appelle *abstraction de données*.
+
+La facilité avec laquelle les données peuvent être combinées
+constitue  un  indicateur  important de  la  puissance  d'un
+langage de programmation, car  cela permet au programmeur de
+ne pas  se soucier de  la structure interne des  données qui
+vont être manipulées par son programme.
+
+Il  existe   plusieurs  moyens   de  combiner   les  données
+primitives  pour   donner  naissance  à  des   données  plus
+abstraites,  en particulier  les procédures.   Une propriété
+est d'une importance capitale pour les moyens de combinaison
+des  données  que met  à  notre  disposition un  langage  de
+programmation: la *clôture*, au  sens mathématique du terme,
+i.e une  donnée composée obtenue  à partir de ce  moyen doit
+pouvoir se composer par le même moyen avec une autre donnée.
+
+Le pouvoir représentatif d'un  langage peut être augmenté en
+y introduisant  les *expressions symboliques*, qui  sont des
+données  dont  les  parties élémentaires  peuvent  être  des
+symboles autres que des chiffres.
+
+Il  y  a  plusieurs  façons dont  une  structure  de  donnée
+particulière  peut  être  représentée en  terme  de  données
+primitives.  Et le choix de  la représentation peut avoir un
+impact siginificatif  sur le temps  de calcul et  la mémoire
+nécessaire au processus qui manipule cette donnée.
+
+De façon  générale, l'abstraction,  qu'elle soit  faite avec
+des  procédures ou  avec  des données,  est nécessaire  pour
+gérer  la  complexité d'un  programme  (en  le découpant  en
+petits modules).
+
+Dans  un même  programme,  il peut  arriver que  différentes
+parties représentent la même donnée de façon différente.  Il
+faut alors mettre en  place des *opérations génériques*, qui
+sont  capables de  gérer plusieurs  représentations pour  le
+même type de donnée.  Pour  maintenir la modularité d'un tel
+programme,  il faut  alors appliquer  une technique  appelée
+*programmation   dirigée  par   la  donnée*   (data-directed
+programming), qui permet de mettre  au point de façon isolée
+différentes représentations de la  donnée et de les combiner
+ensuite de manière additive (sans modification).
+
+Dans  la  méthodologie  de  l'abstraction  de  données,  les
+programmes sont conçus  de manière à opérer  sur des données
+abstraites (les  nombres rationnels  par exemple).   En même
+temps, une  représentation concrète des données  est définie
+de  manière indépendante  des programmes  qui utilisent  les
+données, et  les interfaces entre ces  représentations et le
+programme consommateur des données  peut être un ensemble de
+procédures  appelées  *sélecteurs* et  *constructeurs*.   Ce
+sont ces procédures qui  implémentent les données abstraites
+en termes de représentation concrète.
+
+*** pairs
+
+Une *paire* est une structure de donnée composée qui fournit
+un moyen simple d'implémenter de manière concrète une donnée
+abstraite.   En lisp,  elle  est construite  à l'aide  d'une
+procédure  primitive   appelée  *cons*.   En   Python,  elle
+correspond  à un  *tuple* de  2  éléments.  En  Lisp, les  2
+éléments sont sélectionnés par les procédures respectivement
+appelées  *car* et  *cdr*. Une  paire peut  en contenir  une
+autre  (la  procédure  cons   possède  la  propriété  de  la
+clôture).  Les données objets construites à partir de paires
+sont appelées *données structurées en liste*.
+
+** Abstraction Barriers
+
+En général,  l'idée derrière  l'abstraction par  les données
+est  d'identifier pour  chaque  type de  donnée un  ensemble
+basiques  d'opérations   à  partir  desquelles   toutes  les
+manipulations de données de  ce type peuvent être exprimées,
+et ainsi  n'utiliser que  ces opérations  lorsqu'on manipule
+ces données.
+
+L'abstraction par les données peut être visualisée comme une
+pile  stratifiée, les  procédures définies  à chaque  strate
+étant   les  interfaces   qui   définissent  les   barrières
+d'abstraction  et  qui  connectent les  différentes  strates
+entre elles.
+
+** What Is Meant by Data ?
+
+Une façon de la définir est: un ensemble de sélecteurs et de
+constructeurs qui satisfont certaines conditions.
+
+Cette définition  est formalisée par  Hoare dans ce  qui est
+connu comme la méthode  des *modèles abstraits*. En général,
+les  modèles  abstraits  définissent de  nouveaux  types  de
+données en termes de types d'objets précédemments définis.
+
+Cette façon de définir la  donnée fait qu'il est possible de
+représenter  même  les  données  les plus  bas  niveau  sans
+utiliser de  structures de  données à proprement  parler, du
+moment qu'on  dispose de procédures basiques  satisfaisant à
+certaines  conditions   qui  permettent  de   manipuler  ces
+données.
+
+** Hierarchical Data and the Closure Property
+
+En général, une opération  permettant de combiner des objets
+de données satisfait  la propriété de clôture  si les objets
+obtenus  par combinaison  à l'aide  de cette  opération sont
+eux-mêmes combinables en utilisant la même opération.
+
+Cette  propriété  de  clôture  est  la  clé  du  pouvoir  de
+n'importe quel moyen de combinaison car elle permet de créer
+des *structures hiérarchiques* (structures faites de parties
+contenant elles-mêmes des parties, etc.).
+
+*** Representing Sequences
+
+Une  des structures  les plus  utiles qu'on  peut construire
+avec des  paires est la *séquence*  (une collection ordonnée
+d'objets de données).
+
+La  *liste chaînée*  est  une  implémentation directe  d'une
+séquence. Elle  est construite par une  succession imbriquée
+d'appels  à  la  procédure   permettant  de  construire  une
+paire. Par exemple en Lisp:
+
+#+BEGIN_SRC scheme
+(cons 1
+      (cons 2
+            (cons 3
+                  (cons 4 nil))))
+#+END_SRC
+
+**** List operations
+
+Dans  leur implémentation  par  des  paires, les  opérations
+communes effectuées  sur les séquences implémentées  en tant
+que listes  sont: récupérer le  n-ième élément de  la liste,
+calculer la longueur de  la liste, construire successivement
+une liste  en même  temps qu'on  énumère les  éléments d'une
+autre  liste  (allonger  une  liste  avec  les  éléments  de
+l'autre).
+
+**** Mapping over lists
+
+*map*  est  une  opération  importante  et  très  utile  qui
+consiste à  appliquer une  procédure à chaque  élément d'une
+liste  et   de  renvoyer   la  liste  des   résultats  ainsi
+obtenus. C'est une procédure d'un ordre supérieur.
+
+*** Hierarchical Structures
+
+La  représentation  des  séquences  en termes  de  liste  se
+généralise naturellement pour représenter les séquences dont
+les éléments peuvent être eux-mêmes des séquences.
+
+Une façon de visualiser ce  type de structure est d'y penser
+en terme  d'*arbre*: les  éléments de  la séquence  sont les
+branches de l'arbre  et les éléments qui  sont eux-mêmes des
+séquences sont des sous-arbres.
+
+La *récursivité*  est un outil naturel  pour travailler avec
+les structures en arbre, puisqu'on peut généralement réduire
+les  opérations  sur  les  arbres en  opérations  sur  leurs
+branches,  et  réduire  celles-ci   en  opérations  sur  les
+branches des branches, etc jusqu'à atteindre les feuilles de
+l'arbre.
+
+Pour écrire des procédures récursives sur les arbres, il est
+pratique de  disposer d'un  prédicat primitif  permettant de
+tester si son argument est une paire.
+
+**** Mapping over trees
+
+Map associé  à la récursivité est  une abstraction puissante
+pour travailler avec les arbres.
+
+De  manière générale,  plusieurs opérations  sur les  arbres
+peuvent être implémentées  par des combinaisons d'opérations
+sur les séquences avec la récursivité.
+
+*** Sequences as Conventional Interfaces
+
+L'utilisation   d'*interfaces   conventionnelles*   est   un
+puissant principe de conception  quand on travaille avec des
+structures  de   données.  Cela  revient  à   organiser  les
+programmes de telle sorte qu'ils se présentent comme un flux
+d'un signal qui passe d'un processus à un autre.
+
+**** Sequence Operations
+
+Il est  possible de formuler des  applications de traitement
+de données  conventionnelles en termes d'opérations  sur les
+séquences.    Les   séquences  servent   donc   d'interfaces
+conventionnelles  permettant  de  combiner  des  modules  de
+traitement.
+
+Quand on  représente uniformément les structures  de données
+par  des  séquences,  on   réduit  les  dépendances  de  nos
+programmes par rapport aux structures  de données à un petit
+nombre d'opérations sur les séquences. Ce qui permet, en les
+changeant,  de tester  des représentations  alternatives des
+séquences, tout en laissant intacte  le design global de nos
+programmes.
+
+**** Nested Mappings
+
+Le paradigme de la séquence  peut être utilisé pour exprimer
+en  termes   de  procédures   plusieurs  calculs   qui  sont
+communément exprimés à l'aide de boucles imbriquées.
+
+Il est  commun de *maper*  et d'*accumuler* les  listes avec
+*append*, on  peut donc généraliser cette  opération par une
+abstraction sous forme de procédure appelée *flatmap*.
+
+** Symbolic Data
+
+Pour qu'un  langage aie un pouvoir  représentatif étendu, il
+doit permettre  de travailler avec des  symboles arbitraires
+comme données.
+
+*** Quotation
+
+La  *quotation*  permet  d'identifier   les  listes  et  les
+symboles  qui  doivent  être  traités comme  des  objets  de
+données plutôt  que comme  des expressions à  évaluer. C'est
+une pratique qu'on retrouve dans le langage naturel.
+
+Une  primitive utile  lorsqu'on  manipule  les symboles  est
+celle permettant de  dire à partir de 2  symboles s'ils sont
+identiques.
+
+En  utilisant  cette  primitive,  on  peut  implémenter  une
+procédure utile qui  permet, à partir d'un  symbole et d'une
+liste, de  renvoyer la sous-liste  de la liste  qui commence
+par la 1ère occurence du symbole, ou False si le symbole est
+absent de la liste.
+
+
+
+
+** Multiple representations for abstract data
+
+
+
+
+*** Data Directed Programming and additivity
+
+La stratégie consistant  à vérifier le type  d'une donnée et
+appeler une procédure appropriée est appelée *dispatching on
+type* (ou distribution  sur le type). C'est  une bonne façon
+d'obtenir  de  la  modulatité, mais  elle  possède  quelques
+faiblesses:
+   
+   + L'interface  générique a  une connaissance  globale sur
+     l'ensemble des  représentations différentes,  donc pour
+     rajouter  un nouveau  type,  il  faudrait modifier  les
+     interfaces génériques pour  rajouter une clause prenant
+     en compte la nouvelle représentation.
+   
+   + Même  si les  différentes représentations  peuvent être
+     développées  isolément,  on   doit  s'assurer  que  les
+     procédures n'ont pas les mêmes noms, donc les personnes
+     implémentant  les différentes  représentations ont  une
+     charge supplémentaire sur les épaules.
+
+Ces 2  faiblesses relèvent de  la même propriété  pour cette
+technique de  modularisation: elle n'est pas  *additive*. On
+aimerait  posséder une  technique  permettant une  meilleure
+modularisation, tout  en étant *additive*.   Cette technique
+est   appelée  *data-directed   programming*  (programmation
+dirigée  par   la  donnée),  et  consiste   à  disposer  les
+procédures  génériques  et les  différentes  représentations
+dans un tableau dont  les lignes représentent les procédures
+générique  et les  colones les  différentes représentations.
+L'intersection  entre   une  ligne  et  une   colonne  donne
+l'implémentation de  la procédure générique située  en début
+de la ligne pour la représentation située sur la colonne.
+
+**** Message Passing
+
+La  programmation dirigée  par  les données  est la  méthode
+générique  approchée  par la  distribution  sur  le type  de
+données. En effet cette  dernière décompose chaque opération
+de  la table  de programmation  dirigée par  les données  en
+lignes,  avec chaque  opération  générique représentant  une
+ligne  dans la  table.   Une alternative  à cette  stratégie
+d'implémentation est de décomposer  la table en colonnes et,
+plutôt  que d'utiliser  des  *opérations intelligentes*  qui
+distribuent les  données suivant leur type,  travailler avec
+des *objets  de données intelligents* qui  se distribuent en
+fonction  des  noms  des  opérations.   Pour  ce  faire,  on
+représente  les objets  de  données par  des procédures  qui
+prennent  en  entrée  le   nom  de  l'opération  requise  et
+effectuent l'opération  indiquée. Ce style  de programmation
+est  appelé *Message  Passing*  (passage  de message).   Une
+limite de  ce style est  qu'il ne permet que  des procédures
+génériques  à  un seul  argument  (celui  qui va  dispatcher
+l'opération).
+
+** Systems with generic operations
+
+Jusqu'ici,  tout  ce  qu'on  a fait  c'est  étudier  comment
+concevoir des systèmes dans lesquels les objets peuvent être
+représentés de plus d'une façon. L'idée clé est de relier le
+code  qui  spécifie  les  opérations  sur  les  données  aux
+différentes   représentations  de   ces  données   à  l'aide
+d'interfaces  génériques.   Dans   ce  chapitre,  il  s'agit
+d'appliquer le  même principe  pour arriver à  la définition
+d'opérations  qui sont  génériques non  seulement à  travers
+différentes représentations mais  aussi à travers différents
+types d'arguments.
+
+*** Generic arithmetic operations
+
+
