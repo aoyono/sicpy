@@ -2,8 +2,10 @@
 """
 """
 from Chapter1.themes.great_common_divisor import gcd
-from Chapter2.themes.data_directed_programming_and_additivity import \
-    apply_generic
+from Chapter2.themes.data_directed_programming_and_additivity import (
+    apply_generic, install_polar_package,
+    install_rectangular_package,
+)
 from Chapter2.themes.lisp_list_structured_data import car, cdr, cons, lisp_list
 from Chapter2.themes.data_directed_programming_and_additivity import (
     angle, attach_tag, imag_part, magnitude, real_part,
@@ -93,6 +95,10 @@ def install_rational_package():
             numer(x) * denom(y),
             denom(x) * numer(y))
 
+    # From exercise 2.79
+    def equal_rat(x, y):
+        return numer(x) * denom(y) == numer(y) * denom(x)
+
     # interface to the rest of the system
     def tag(x):
         return attach_tag(quote('rational'), x)
@@ -109,6 +115,10 @@ def install_rational_package():
     put(quote('div'),
         quote(lisp_list('rational', 'rational')),
         lambda x, y: tag(div_rat(x, y)))
+    # From exercise 2.79
+    put(quote('equals'),
+        quote(lisp_list('rational', 'rational')),
+        equal_rat)
 
     put(quote('make'),
         quote('rational'),
@@ -149,6 +159,11 @@ def install_complex_package():
             magnitude(z1) / magnitude(z2),
             angle(z1) - angle(z2))
 
+    # From exercise 2.79
+    def equals(z1, z2):
+        return (real_part(z1) == real_part(z2)
+                and imag_part(z1) == imag_part(z2))
+
     # Interface to the rest of the system
     def tag(z):
         return attach_tag(quote('complex'), z)
@@ -165,6 +180,16 @@ def install_complex_package():
     put(quote('div'),
         quote(lisp_list('complex', 'complex')),
         lambda z1, z2: tag(div_complex(z1, z2)))
+    # From exercise 2.79
+    put(quote('equals'),
+        quote(lisp_list('complex', 'complex')),
+        equals)
+
+    # install polar and rectangular representations
+    # this is necessary as we retrieve some methods for these representations
+    # in the internal methods defined here
+    install_polar_package()
+    install_rectangular_package()
 
     put(quote('make-from-real-imag'),
         quote('complex'),

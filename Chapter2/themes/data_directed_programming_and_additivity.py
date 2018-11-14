@@ -89,10 +89,10 @@ def install_polar_package():
 
 
 def apply_generic(op, *args):
-    with let(map(type_tag, args)) as (type_tags,):
+    with let(map(type_tag, lisp_list(*args))) as (type_tags,):
         with let(get(op, type_tags)) as (proc,):
             if proc:
-                return apply(proc, map(contents, args))
+                return apply(proc, map(contents, lisp_list(*args)))
             error('No method for these types: {} -- APPLY-GENERIC'.format(
                 lisp_list(op, type_tags)))
 

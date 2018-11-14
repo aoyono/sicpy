@@ -55,5 +55,5 @@ def _lisp_list_to_python_list(l):
     result = []
     while elt:
         result.append(car(elt))
-        elt = cdr(l)
+        elt = cdr(elt)
     return result

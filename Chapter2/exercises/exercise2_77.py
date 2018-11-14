@@ -2,9 +2,10 @@
 """
 https://mitpress.mit.edu/sicp/full-text/book/book-Z-H-16.html#%_thm_2.77
 """
+from Chapter2.exercises.exercise2_78 import contents
 from Chapter2.themes.data_directed_programming_and_additivity import (
     angle, attach_tag, imag_part, install_rectangular_package, magnitude,
-    real_part
+    real_part, install_polar_package,
 )
 from Chapter2.themes.generic_arithmetic_operations import (
     make_complex_from_real_imag
@@ -45,6 +46,11 @@ def install_complex_package():
             magnitude(z1) / magnitude(z2),
             angle(z1) - angle(z2))
 
+    # From exercise 2.79
+    def equals(z1, z2):
+        return (real_part(z1) == real_part(z2)
+                and imag_part(z1) == imag_part(z2))
+
     # Interface to the rest of the system
     def tag(z):
         return attach_tag(quote('complex'), z)
@@ -69,6 +75,12 @@ def install_complex_package():
         quote('complex'),
         lambda r, a: tag(make_from_mag_ang(r, a)))
 
+    # install polar and rectangular representations
+    # this is necessary as we retrieve some methods for these representations
+    # in the internal methods defined here
+    install_polar_package()
+    install_rectangular_package()
+
     put(quote('real-part'),
         quote(lisp_list('complex')),
         real_part)
@@ -81,6 +93,11 @@ def install_complex_package():
     put(quote('angle'),
         quote(lisp_list('complex')),
         angle)
+
+    # From exercise 2.79
+    put(quote('equals'),
+        quote(lisp_list('complex', 'complex')),
+        equals)
     return quote('done')
 
 
