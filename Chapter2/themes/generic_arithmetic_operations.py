@@ -99,6 +99,10 @@ def install_rational_package():
     def equal_rat(x, y):
         return numer(x) * denom(y) == numer(y) * denom(x)
 
+    # From exercise 2.80
+    def eq_zero(x):
+        return numer(x) == 0
+
     # interface to the rest of the system
     def tag(x):
         return attach_tag(quote('rational'), x)
@@ -119,6 +123,10 @@ def install_rational_package():
     put(quote('equals'),
         quote(lisp_list('rational', 'rational')),
         equal_rat)
+    # From exercise 2.80
+    put(quote('eq_zero'),
+        quote(lisp_list('rational')),
+        eq_zero)
 
     put(quote('make'),
         quote('rational'),
@@ -164,6 +172,10 @@ def install_complex_package():
         return (real_part(z1) == real_part(z2)
                 and imag_part(z1) == imag_part(z2))
 
+    # From exercise 2.80
+    def eq_zero(z):
+        return equals(z, make_from_real_imag(0, 0))
+
     # Interface to the rest of the system
     def tag(z):
         return attach_tag(quote('complex'), z)
@@ -184,6 +196,10 @@ def install_complex_package():
     put(quote('equals'),
         quote(lisp_list('complex', 'complex')),
         equals)
+    # From exercise 2.80
+    put(quote('eq_zero'),
+        quote(lisp_list('complex')),
+        eq_zero)
 
     # install polar and rectangular representations
     # this is necessary as we retrieve some methods for these representations
