@@ -3,8 +3,8 @@
 """
 import turtle
 
-from Chapter2.exercise2_18 import reverse
-from Chapter2.exercise2_23 import for_each
+from Chapter2.exercises.exercise2_18 import reverse
+from Chapter2.exercises.exercise2_23 import for_each
 from Chapter2.themes.lisp_list_structured_data import append, cadr, car, cddr, cdr, cons, lisp_list, list_ref, nil
 from utils import let
 
@@ -473,13 +473,16 @@ def run_the_magic():
         make_vect(1.0, 0.0),
         make_vect(0.0, 1.0)
     )
-    edges(f)
-    below(diamond, wave)(f)
-    below2(diamond, wave)(f)
+    # edges(f)
+    # below(diamond, wave)(f)
+    # below2(diamond, wave)(f)
     # beside(diamond, wave)(f)
     # below(wave, flip_vert(wave))(f)
     # wave(f)
     # below2(wave, flip_vert(wave))(f)
+    # X(f)
+    outline(f)
+    corner_split(wave, 4)(f)
     board.mainloop()
 
 
